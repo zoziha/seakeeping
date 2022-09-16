@@ -10,6 +10,7 @@ module seakeeping
     use seakeeping_math
     use seakeeping_tsa
     use seakeeping_wave
+    use seakeeping_utils
     implicit none
 
 end module seakeeping
