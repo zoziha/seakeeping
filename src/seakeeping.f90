@@ -12,6 +12,7 @@ module seakeeping
     use seakeeping_wave
     use seakeeping_utils
     use seakeeping_units
+    use seakeeping_geometry
     implicit none
 
 end module seakeeping

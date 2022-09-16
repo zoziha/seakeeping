@@ -44,17 +44,15 @@ contains
 
     !> Heron's formula for the area of a triangle <br>
     !> 海伦公式计算三角形面积
-    pure subroutine heron_formula(a, b, c, s)
+    pure real(rk) function heron_formula(a, b, c) result(s)
         real(rk), intent(in) :: a, b, c     !! Length of the three sides of the triangle <br>
                                             !! 三边长 (m)
-        real(rk), intent(out) :: s          !! Area of the triangle <br>
-                                            !! 三角形面积 (m2)
 
         associate (p => (a + b + c)/2)
             s = sqrt(p*(p - a)*(p - b)*(p - c))
         end associate
 
-    end subroutine heron_formula
+    end function heron_formula
 
     !> Calculate the angle of two vectors <br>
     !> 计算两向量的夹角
