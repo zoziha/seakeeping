@@ -9,7 +9,11 @@ module seakeeping_utils
     implicit none
     private
 
-    public :: swap
+    public :: swap, incr
+
+    interface incr
+        procedure :: incr_ik, incr_rk
+    end interface incr
 
 contains
 
@@ -24,5 +28,33 @@ contains
         b = tmp
 
     end subroutine swap
+
+    !> Increment a variable <br>
+    !> 增量一个变量
+    elemental subroutine incr_rk(a, b)
+        real(rk), intent(inout) :: a
+        real(rk), intent(in), optional :: b
+
+        if (present(b)) then
+            a = a + b
+        else
+            a = a + 1.0_rk
+        end if
+
+    end subroutine incr_rk
+
+    !> Increment a variable <br>
+    !> 增量一个变量
+    elemental subroutine incr_ik(a, b)
+        integer, intent(inout) :: a
+        integer, intent(in), optional :: b
+
+        if (present(b)) then
+            a = a + b
+        else
+            a = a + 1
+        end if
+
+    end subroutine incr_ik
 
 end module seakeeping_utils
