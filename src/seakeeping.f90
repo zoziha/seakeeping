@@ -11,6 +11,7 @@ module seakeeping
     use seakeeping_tsa
     use seakeeping_wave
     use seakeeping_utils
+    use seakeeping_units
     implicit none
 
 end module seakeeping

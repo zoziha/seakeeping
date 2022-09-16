@@ -10,10 +10,9 @@ module seakeeping_math
     implicit none
     private
 
-    public :: cross_product, arg, rad2deg
+    public :: cross_product, arg
 
     complex(rk), parameter :: zero_cmplx = (0.0_rk, 0.0_rk)
-    real(rk), parameter :: pi180 = 180.0_rk/Pi
 
 contains
 
@@ -42,14 +41,5 @@ contains
         end if
 
     end function arg
-
-    !> Radians to degrees <br>
-    !> 弧度转角度
-    elemental real(rk) function rad2deg(rad)
-        real(rk), intent(in) :: rad
-
-        rad2deg = rad*pi180
-
-    end function rad2deg
 
 end module seakeeping_math
