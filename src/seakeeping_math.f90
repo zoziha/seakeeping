@@ -10,7 +10,7 @@ module seakeeping_math
     implicit none
     private
 
-    public :: cross_product, arg, heron_formula
+    public :: cross_product, arg, heron_formula, angle
 
     complex(rk), parameter :: zero_cmplx = (0.0_rk, 0.0_rk)
 
@@ -55,5 +55,15 @@ contains
         end associate
 
     end subroutine heron_formula
+
+    !> Calculate the angle of two vectors <br>
+    !> 计算两向量的夹角
+    pure real(rk) function angle(x, y)
+        real(rk), intent(in), dimension(3) :: x, y  !! Two vectors <br>
+                                                    !! 两向量
+
+        angle = acos(dot_product(x, y)/(norm2(x)*norm2(y)))
+
+    end function angle
 
 end module seakeeping_math
