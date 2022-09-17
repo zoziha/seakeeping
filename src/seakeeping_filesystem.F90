@@ -7,7 +7,8 @@ module seakeeping_filesystem
     implicit none
     private
 
-    public :: is_exist, countlines, operator(.join.), is_windows, windows_path
+    public :: is_exist, countlines, operator(.join.), is_windows, windows_path, &
+              mkdir, rmdir
 
     interface operator(.join.)
         procedure :: join_path
@@ -113,5 +114,33 @@ contains
         end if
 
     end function join_path
+
+    !> Make directory <br>
+    !> 生成文件夹路径
+    impure elemental subroutine mkdir(path)
+        character(*), intent(in) :: path    !! path name <br>
+                                            !! 文件夹路径
+        integer :: exitstat
+        if (is_windows()) then
+            call execute_command_line("md "//windows_path(path), exitstat=exitstat)
+        else
+            call execute_command_line("mkdir -p "//path, exitstat=exitstat)
+        end if
+
+    end subroutine mkdir
+
+    !> Remove directory <br>
+    !> 删除文件夹路径
+    impure elemental subroutine rmdir(path)
+        character(*), intent(in) :: path    !! path name <br>
+                                            !! 文件夹路径
+        integer :: exitstat
+        if (is_windows()) then
+            call execute_command_line("rd /s /q "//windows_path(path), exitstat=exitstat)
+        else
+            call execute_command_line("rm -rf "//path, exitstat=exitstat)
+        end if
+
+    end subroutine rmdir
 
 end module seakeeping_filesystem
