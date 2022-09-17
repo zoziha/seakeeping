@@ -24,7 +24,7 @@ contains
         character(*), intent(in) :: file_name   !! file name <br>
                                                 !! 文件名
 
-        write (error_unit, '(a15,a)') 'FileNotFoundError: ', file_name
+        write (error_unit, '(2a)') 'FileNotFoundError: ', file_name
         stop file_not_found_error_code
 
     end subroutine file_not_found_error
@@ -35,7 +35,7 @@ contains
         character(*), intent(in) :: msg   !! error message <br>
                                           !! 错误信息
 
-        write (error_unit, '(a15,a)') 'InternalError: ', msg
+        write (error_unit, '(2a)') 'InternalError: ', msg
         stop interal_error_code
 
     end subroutine internal_error
@@ -48,7 +48,7 @@ contains
         character(*), intent(in) :: msg         !! error message <br>
                                                 !! 错误信息
 
-        write (error_unit, '(a15,2a)') 'FileParseError: ', file_name, msg
+        write (error_unit, '(3a)') 'FileParseError: ', file_name, msg
         stop file_parse_error_code
 
     end subroutine file_parse_error
@@ -59,7 +59,7 @@ contains
         character(*), intent(in) :: msg   !! error message <br>
                                           !! 错误信息
 
-        write (error_unit, '(a15,a)') 'FatalError: ', msg
+        write (error_unit, '(2a)') 'FatalError: ', msg
         stop fatal_error_code
 
     end subroutine fatal_error
