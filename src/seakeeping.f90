@@ -14,6 +14,7 @@ module seakeeping
     use seakeeping_units
     use seakeeping_geometry
     use seakeeping_string
+    use seakeeping_filesystem
     implicit none
 
 end module seakeeping
