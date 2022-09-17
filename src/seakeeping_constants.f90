@@ -9,7 +9,7 @@ module seakeeping_constants
     implicit none
     private
 
-    public :: g, Pi
+    public :: g, Pi, rho_sw, rho_fw, rho_air, p_atm, sqrt_eps
 
     real(rk), parameter :: g = 9.806_rk             !! Gravity acceleration <br>
                                                     !! 重力加速度
@@ -23,5 +23,7 @@ module seakeeping_constants
                                                     !! 空气密度
     real(rk), parameter :: p_atm = 101325.0_rk      !! Atmospheric pressure <br>
                                                     !! 大气压力
+    real(rk), parameter :: sqrt_eps = sqrt(epsilon(1.0_rk))     !! sqrt(epsilon) <br>
+                                                                !! 小量，平方根精度
 
 end module seakeeping_constants
