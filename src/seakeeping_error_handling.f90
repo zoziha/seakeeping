@@ -9,7 +9,7 @@ module seakeeping_error_handling
     implicit none
     private
 
-    public :: file_not_found_error, internal_error, file_parse_error, fatal_error
+    public :: file_not_found_error, internal_error, file_parse_error, fatal_error, check
 
     integer, parameter :: interal_error_code = -1
     integer, parameter :: fatal_error_code = -2
@@ -63,5 +63,19 @@ contains
         stop fatal_error_code
 
     end subroutine fatal_error
+
+    !> Check if the condition is true <br>
+    !> 检查条件是否为真
+    subroutine check(condition, msg)
+        logical, intent(in) :: condition   !! condition <br>
+                                           !! 条件
+        character(*), intent(in) :: msg    !! error message <br>
+                                           !! 错误信息
+
+        if (.not. condition) then
+            call fatal_error(msg)
+        end if
+
+    end subroutine check
 
 end module seakeeping_error_handling
