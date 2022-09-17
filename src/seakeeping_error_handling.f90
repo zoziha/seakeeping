@@ -1,0 +1,67 @@
+!> author: 左志华
+!> date: 2022-09-17
+!>
+!> Error handling for seakeeping <br>
+!> 耐波性错误处理
+module seakeeping_error_handling
+
+    use, intrinsic :: iso_fortran_env, only: error_unit
+    implicit none
+    private
+
+    public :: file_not_found_error, internal_error, file_parse_error, fatal_error
+
+    integer, parameter :: interal_error_code = -1
+    integer, parameter :: fatal_error_code = -2
+    integer, parameter :: file_not_found_error_code = -3
+    integer, parameter :: file_parse_error_code = -4
+
+contains
+
+    !> File not found error <br>
+    !> 文件未找到错误
+    subroutine file_not_found_error(file_name)
+        character(*), intent(in) :: file_name   !! file name <br>
+                                                !! 文件名
+
+        write (error_unit, '(a15,a)') 'FileNotFoundError: ', file_name
+        stop file_not_found_error_code
+
+    end subroutine file_not_found_error
+
+    !> Internal error <br>
+    !> 内部错误
+    subroutine internal_error(msg)
+        character(*), intent(in) :: msg   !! error message <br>
+                                          !! 错误信息
+
+        write (error_unit, '(a15,a)') 'InternalError: ', msg
+        stop interal_error_code
+
+    end subroutine internal_error
+
+    !> File parse error <br>
+    !> 文件解析错误
+    subroutine file_parse_error(file_name, msg)
+        character(*), intent(in) :: file_name   !! file name <br>
+                                                !! 文件名
+        character(*), intent(in) :: msg         !! error message <br>
+                                                !! 错误信息
+
+        write (error_unit, '(a15,2a)') 'FileParseError: ', file_name, msg
+        stop file_parse_error_code
+
+    end subroutine file_parse_error
+
+    !> Fatal error <br>
+    !> 致命错误
+    subroutine fatal_error(msg)
+        character(*), intent(in) :: msg   !! error message <br>
+                                          !! 错误信息
+
+        write (error_unit, '(a15,a)') 'FatalError: ', msg
+        stop fatal_error_code
+
+    end subroutine fatal_error
+
+end module seakeeping_error_handling

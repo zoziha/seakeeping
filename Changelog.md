@@ -5,13 +5,13 @@
 - [x] 引入 filesystem，文件系统；
 - [x] 引入 string，字符串；
 - [x] 引入 master-time，时间库；
+- [x] 引入 error-stop，错误报告；
 
 ## 待办
 
 - [ ] 引入 toml-f，配置文件；
 - [ ] 引入 M_CLI2，命令行；
 - [ ] 引入 stdlib-logger，日志；
-- [ ] 引入 error-stop，错误报告；
 - [ ] 添加单元测试；
 - [ ] 添加 FORD 文档；
 
