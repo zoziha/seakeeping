@@ -15,6 +15,7 @@ module seakeeping
     use seakeeping_geometry
     use seakeeping_string
     use seakeeping_filesystem
+    use seakeeping_display
     implicit none
 
 end module seakeeping
