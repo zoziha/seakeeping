@@ -13,6 +13,7 @@ module seakeeping
     use seakeeping_utils
     use seakeeping_units
     use seakeeping_geometry
+    use seakeeping_string
     implicit none
 
 end module seakeeping
