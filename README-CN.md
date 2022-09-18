@@ -18,3 +18,5 @@
 - root-fortran：根查找；
 - polyroot-fortran：多项式根查找；
 - Source Codes in Fortran90: Fortran 90 代码。
+
+此外，还有 CAE 模型的解析和数值模型可视化，技术细节层面如函数积分、统计、排序、特殊函数等内容。

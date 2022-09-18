@@ -18,3 +18,5 @@ Here are other packages that are suitable for marine seakeeping issues:
 - root-fortran: root lookup;
 - polyroot-fortran: polynomial root search;
 - Source Codes in Fortran90: Fortran 90 code.
+
+In addition, there are analysis of CAE models and visualization of numerical models, and technical details such as function integration, statistics, sorting, special functions, etc.
