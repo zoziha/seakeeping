@@ -3,8 +3,8 @@ project: seakeeping
 summary: 船舶耐波性例程
 src_dir: src
 preprocess: false
-project_website: https://gitee.com/ship-motions/ti-acv
-project_download: https://gitee.com/ship-motions/ti-acv/releases
+project_website: https://gitee.com/ship-motions/seakeeping
+project_download: https://gitee.com/ship-motions/seakeeping/releases
 output_dir: API-html
 page_dir: doc
 media_dir: doc/media
