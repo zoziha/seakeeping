@@ -18,6 +18,7 @@ module seakeeping
     use seakeeping_display
     use seakeeping_time
     use seakeeping_error_handling
+    use seakeeping_statics
     implicit none
 
 end module seakeeping
