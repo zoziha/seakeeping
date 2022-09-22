@@ -1,5 +1,14 @@
 # 船舶耐波性包
 
+[![seakeeping](https://img.shields.io/badge/seakeeping-v0.2.1-blueviolet)][1]
+[![license](https://img.shields.io/badge/License-BSD--3-important)](LICENSE)
+[![fpm](https://img.shields.io/badge/Fortran--lang/fpm-^0.6.0-blue)][2]
+[![Compiler](https://img.shields.io/badge/Compiler-GFortran^10.3.0-brightgreen)][3]
+
+[1]: https://gitee.com/Ship-Motions/Ti-PFT
+[2]: https://github.com/fortran-lang/fpm
+[3]: https://fortran-lang.org/compilers
+
 基于编程经验，对特定领域编写更详实的表达型代码，有助于从底层提高代码的可读性、可维护性、可描述性。
 
 于是，形成了这个包，用于表达、计算船舶耐波性问题。
