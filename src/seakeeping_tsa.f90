@@ -12,7 +12,7 @@ module seakeeping_tsa
     implicit none
     private
 
-    public :: AMPD, ffti, fft
+    public :: AMPD, ffti, fft, fftshift
 
 contains
 
@@ -178,5 +178,20 @@ contains
         end do
 
     end subroutine step
+
+    !> FFT shift <br>
+    !> FFT 位移
+    pure function fftshift(x, back) result(y)
+        real(rk), intent(in) :: x(:)
+        logical, intent(in) :: back
+        real(rk) :: y(size(x))
+
+        if (back) then
+            y = cshift(x, shift=-ceiling(0.5_rk*size(x)))
+        else
+            y = cshift(x, shift=-floor(0.5_rk*size(x)))
+        end if
+
+    end function fftshift
 
 end module seakeeping_tsa
