@@ -40,7 +40,13 @@ contains
             unit_ = output_unit
         end if
 
-        if (present(header)) write (unit_, '(a)') header
+        if (present(header)) then
+            if (rank(x) == 0) then  ! 标量数据与 header 在一行输出
+                write (unit_, '(a)', advance='no') header
+            else
+                write (unit_, '(a)', advance='yes') header
+            end if
+        end if
 
         select rank (x)
 #ifdef __GFORTRAN__
