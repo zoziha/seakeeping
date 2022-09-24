@@ -3,6 +3,8 @@
 !>
 !> Seakeeping wave theory <br>
 !> 耐波性波浪理论
+!>### 参考
+!> 1. 船舶原理（上）
 module seakeeping_wave
 
     use seakeeping_kinds, only: rk
@@ -10,7 +12,7 @@ module seakeeping_wave
     implicit none
     private
 
-    public :: k01, k02, we, wlr, wf
+    public :: k01, k02, we, wlr, wf, wenergy, TPC
 
 contains
 
@@ -73,5 +75,29 @@ contains
         wf = sqrt(g*k02(wlr*l))
 
     end function wf
+
+    !> Wave energy <br>
+    !> 波能：动能 + 势能, \( energy = 0.5*ρ*A^2*g \)
+    elemental real(rk) function wenergy(rho, a)
+        real(rk), intent(in) :: rho !! Water density <br>
+                                    !! 水密度
+        real(rk), intent(in) :: a   !! Wave amplitude <br>
+                                    !! 波幅
+
+        wenergy = rho*g*a*a/2
+
+    end function wenergy
+
+    !> TPC <br>
+    !> 每厘米吃水吨数 \( TPC = rho*Aw/100 \)
+    elemental real(rk) function TPC(rho, Aw)
+        real(rk), intent(in) :: rho !! Water density <br>
+                                    !! 水密度
+        real(rk), intent(in) :: Aw  !! waterline area <br>
+                                    !! 水线面面积
+
+        TPC = rho*Aw/100
+
+    end function TPC
 
 end module seakeeping_wave
