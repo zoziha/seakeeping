@@ -1,5 +1,6 @@
 !> author: 左志华
 !> date: 2022-09-16
+!> version: alpha
 !>
 !> Seakeeping geometry <br>
 !> 耐波性几何学
@@ -22,7 +23,7 @@ module seakeeping_geometry
 
 contains
 
-    !> Centroid of a triangle
+    !> Centroid of a triangle <br>
     !> 三角形形心
     pure function centroid3l(a, b, c) result(cen)
         real(rk), intent(in) :: a(3), b(3), c(3)
@@ -32,7 +33,7 @@ contains
 
     end function centroid3l
 
-    !> Centroid of a quadrilateral
+    !> Centroid of a quadrilateral <br>
     !> 四边形形心
     pure function centroid4l(a, b, c, d) result(cen)
         real(rk), intent(in) :: a(3), b(3), c(3), d(3)
@@ -42,7 +43,7 @@ contains
 
     end function centroid4l
 
-    !> Area of a triangle
+    !> Area of a triangle <br>
     !> 三角形面积
     pure function area3l(a, b, c) result(area)
         real(rk), intent(in) :: a(3), b(3), c(3)
@@ -56,7 +57,7 @@ contains
 
     end function area3l
 
-    !> Area of a quadrilateral
+    !> Area of a quadrilateral <br>
     !> 四边形面积
     pure function area4l(a, b, c, d) result(area)
         real(rk), intent(in) :: a(3), b(3), c(3), d(3)
@@ -72,8 +73,8 @@ contains
 
     end function area4l
 
-    !> Distance between two points
-    !> 两点间距离
+    !> Distance between two points <br>
+    !> 两点间距离, \( d = |\overrightarrow{ab} | \)
     pure function distance(a, b) result(dis)
         real(rk), intent(in) :: a(3), b(3)
         real(rk) :: dis
