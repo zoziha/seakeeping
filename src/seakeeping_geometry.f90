@@ -49,9 +49,9 @@ contains
         real(rk), intent(in) :: a(3), b(3), c(3)
         real(rk) :: area
 
-        associate (d1 => distance(a, b), &
-                   d2 => distance(b, c), &
-                   d3 => distance(c, a))
+        associate (d1 => distance(a - b), &
+                   d2 => distance(b - c), &
+                   d3 => distance(c - a))
             area = heron_formula(d1, d2, d3)
         end associate
 
@@ -63,11 +63,11 @@ contains
         real(rk), intent(in) :: a(3), b(3), c(3), d(3)
         real(rk) :: area
 
-        associate (d1 => distance(a, b), &
-                   d2 => distance(b, c), &
-                   d3 => distance(c, d), &
-                   d4 => distance(d, a), &
-                   dc => distance(a, c))
+        associate (d1 => distance(a - b), &
+                   d2 => distance(b - c), &
+                   d3 => distance(c - d), &
+                   d4 => distance(d - a), &
+                   dc => distance(a - c))
             area = heron_formula(d1, d2, dc) + heron_formula(dc, d3, d4)
         end associate
 
@@ -75,11 +75,11 @@ contains
 
     !> Distance between two points <br>
     !> 两点间距离, \( d = |\overrightarrow{ab} | \)
-    pure function distance(a, b) result(dis)
-        real(rk), intent(in) :: a(3), b(3)
+    pure function distance(a) result(dis)
+        real(rk), intent(in) :: a(3)
         real(rk) :: dis
 
-        dis = sqrt(sum((a(:) - b(:))**2))
+        dis = sqrt(a(1)*a(1) + a(2)*a(2) + a(3)*a(3))
 
     end function distance
 
