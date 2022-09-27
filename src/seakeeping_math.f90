@@ -11,7 +11,7 @@ module seakeeping_math
     implicit none
     private
 
-    public :: cross_product, arg, heron_formula, angle, arange, is_close
+    public :: cross_product, arg, heron_formula, angle, arange, is_close, unitize
 
     interface arange
         procedure :: arange_ik, arange_rk
@@ -175,5 +175,15 @@ contains
         end if
 
     end function is_close
+
+    !> Unitize a vector <br>
+    !> 单位化向量
+    pure function unitize(x) result(y)
+        real(rk), intent(in), dimension(3) :: x
+        real(rk), dimension(3) :: y
+
+        y = x/sqrt(sum(x*x))
+
+    end function unitize
 
 end module seakeeping_math
