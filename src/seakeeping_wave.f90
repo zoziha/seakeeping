@@ -12,7 +12,7 @@ module seakeeping_wave
     implicit none
     private
 
-    public :: k01, k02, we, wlr, wf, wenergy, TPC
+    public :: k01, k02, we, wlr, wf, wenergy
 
 contains
 
@@ -87,17 +87,5 @@ contains
         wenergy = rho*g*a*a/2
 
     end function wenergy
-
-    !> TPC <br>
-    !> 每厘米吃水吨数 \( TPC = rho*Aw/100 \)
-    elemental real(rk) function TPC(rho, Aw)
-        real(rk), intent(in) :: rho !! Water density <br>
-                                    !! 水密度
-        real(rk), intent(in) :: Aw  !! waterline area <br>
-                                    !! 水线面面积
-
-        TPC = rho*Aw/100
-
-    end function TPC
 
 end module seakeeping_wave

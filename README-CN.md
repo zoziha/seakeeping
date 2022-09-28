@@ -1,11 +1,11 @@
 # 船舶耐波性包
 
-[![seakeeping](https://img.shields.io/badge/seakeeping-v0.2.1-blueviolet)][1]
+[![seakeeping](https://img.shields.io/badge/seakeeping-v0.2.2-blueviolet)][1]
 [![license](https://img.shields.io/badge/License-BSD--3-important)](LICENSE)
 [![fpm](https://img.shields.io/badge/Fortran--lang/fpm-^0.6.0-blue)][2]
 [![Compiler](https://img.shields.io/badge/Compiler-GFortran^10.3.0-brightgreen)][3]
 
-[1]: https://gitee.com/Ship-Motions/Ti-PFT
+[1]: https://gitee.com/ship-motions/seakeeping
 [2]: https://github.com/fortran-lang/fpm
 [3]: https://fortran-lang.org/compilers
 

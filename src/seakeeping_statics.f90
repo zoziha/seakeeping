@@ -10,7 +10,7 @@ module seakeeping_statics
     implicit none
     private
 
-    public :: hsp
+    public :: hsp, TPC
 
 contains
 
@@ -25,5 +25,17 @@ contains
         p = rho*g*h
 
     end function hsp
+
+    !> TPC <br>
+    !> 每厘米吃水吨数 \( TPC = rho*Aw/100 \)
+    elemental real(rk) function TPC(rho, Aw)
+        real(rk), intent(in) :: rho !! Water density <br>
+                                    !! 水密度
+        real(rk), intent(in) :: Aw  !! waterline area <br>
+                                    !! 水线面面积
+
+        TPC = rho*Aw/100
+
+    end function TPC
 
 end module seakeeping_statics
