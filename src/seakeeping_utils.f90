@@ -5,11 +5,12 @@
 !> 耐波性工具
 module seakeeping_utils
 
+    use, intrinsic :: iso_c_binding, only: c_int
     use seakeeping_kinds, only: rk
     implicit none
     private
 
-    public :: swap, incr, optval
+    public :: swap, incr, optval, isatty, env_color
 
     interface incr
         procedure :: incr_ik, incr_rk
@@ -18,6 +19,14 @@ module seakeeping_utils
     interface optval
         procedure :: optval_ik, optval_rk, optval_lk
     end interface optval
+
+    ! 从 Fortran-lang/fpm 借鉴来的 TTY 检测，GFortran 自带的终端检测在 Windows 下不可用
+    interface
+        function isatty() bind(c, name='c_isatty')
+            import :: c_int
+            integer(c_int) :: c_isatty
+        end function isatty
+    end interface
 
 contains
 
@@ -105,5 +114,21 @@ contains
         end if
 
     end function optval_lk
+
+    !> Get the value of the environment variable NO_COLOR to determine whether to enable console color <br>
+    !> 获取环境变量 NO_COLOR 的值，确定是否启用控制台颜色
+    !> @note NO_COLOR 存在，则 env_color 返回 .false.
+    logical function env_color()
+        integer :: color_status
+        character(len=128) :: color_value
+
+        call get_environment_variable("NO_COLOR", color_value, status=color_status)
+        if (color_status == 0) then
+            env_color = .false.
+        else
+            env_color = .true.
+        end if
+
+    end function env_color
 
 end module seakeeping_utils
