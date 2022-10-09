@@ -16,6 +16,10 @@ module seakeeping_utils
         procedure :: incr_ik, incr_rk
     end interface incr
 
+    interface swap
+        procedure :: swap_ik, swap_rk
+    end interface swap
+
     interface optval
         procedure :: optval_ik, optval_rk, optval_lk
     end interface optval
@@ -32,7 +36,19 @@ contains
 
     !> Swap two variables <br>
     !> 交换两个变量
-    elemental subroutine swap(a, b)
+    elemental subroutine swap_ik(a, b)
+        integer, intent(inout) :: a, b
+        integer :: tmp
+
+        tmp = a
+        a = b
+        b = tmp
+
+    end subroutine swap_ik
+
+    !> Swap two variables <br>
+    !> 交换两个变量
+    elemental subroutine swap_rk(a, b)
         real(rk), intent(inout) :: a, b
         real(rk) :: tmp
 
@@ -40,7 +56,7 @@ contains
         a = b
         b = tmp
 
-    end subroutine swap
+    end subroutine swap_rk
 
     !> Increment a variable <br>
     !> 增量一个变量
