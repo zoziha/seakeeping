@@ -4,6 +4,8 @@ Based on programming experience, writing more detailed and expressive code for a
 
 Therefore, this package is formed to express and calculate the seakeeping problem of ships.
 
+Note: Based on the module shake-off feature of the `fpm` program, modules that are not `use` will not participate in the source code compilation, which can relatively improve the compilation efficiency.
+
 ## Other packages
 
 Here are other packages that are suitable for marine seakeeping issues:
