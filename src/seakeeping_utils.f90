@@ -10,7 +10,7 @@ module seakeeping_utils
     implicit none
     private
 
-    public :: swap, incr, optval, isatty, env_color
+    public :: swap, incr, optval, isatty, env_color, bubble_sort
 
     interface incr
         procedure :: incr_ik, incr_rk
@@ -146,5 +146,22 @@ contains
         end if
 
     end function env_color
+
+    !> Bubble sort <br>
+    !> 冒泡排序
+    pure subroutine bubble_sort(unsorted)
+        integer, intent(inout) :: unsorted(:)
+        integer :: ik, jk, isize
+
+        isize = size(unsorted)
+        do ik = 1, isize
+
+            do jk = ik, isize
+                if (unsorted(ik) > unsorted(jk)) call swap_ik(unsorted(ik), unsorted(jk))
+            end do
+
+        end do
+
+    end subroutine bubble_sort
 
 end module seakeeping_utils
