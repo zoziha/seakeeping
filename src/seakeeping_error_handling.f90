@@ -48,7 +48,7 @@ contains
         character(*), intent(in) :: msg         !! error message <br>
                                                 !! 错误信息
 
-        write (error_unit, '(3a)') 'FileParseError: ', file_name, msg
+        write (error_unit, '(4a)') 'FileParseError: ', file_name, ', ', msg
         stop file_parse_error_code
 
     end subroutine file_parse_error
