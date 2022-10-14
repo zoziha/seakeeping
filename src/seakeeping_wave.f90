@@ -12,7 +12,7 @@ module seakeeping_wave
     implicit none
     private
 
-    public :: k01, k02, we, wlr, wf, wenergy
+    public :: k01, k02, we, wlr, wf, wenergy, zeta
 
 contains
 
@@ -87,5 +87,14 @@ contains
         wenergy = rho*g*a*a/2
 
     end function wenergy
+
+    !> Wave amplitude <br>
+    !> 单位波幅：\( \zeta = \sin(kx\cos\beta + ky\sin\beta + \omega t) \)
+    real(rk) pure function zeta(k, x, y, w, t, beta)
+        real(rk), intent(in) :: k, x, y, w, t, beta
+
+        zeta = sin(k*x*cos(beta) + k*y*sin(beta) + w*t)
+
+    end function zeta
 
 end module seakeeping_wave
