@@ -11,11 +11,15 @@ module seakeeping_math
     implicit none
     private
 
-    public :: cross_product, arg, heron_formula, angle, arange, is_close, unitize
+    public :: cross_product, arg, heron_formula, angle, arange, linspace, is_close, unitize
 
     interface arange
         procedure :: arange_ik, arange_rk
     end interface arange
+
+    interface linspace
+        procedure :: linspace_ik, linspace_rk
+    end interface linspace
 
     complex(rk), parameter :: zero_cmplx = (0.0_rk, 0.0_rk)
 
@@ -185,5 +189,53 @@ contains
         y = x/sqrt(sum(x*x))
 
     end function unitize
+
+    !> constructs a vector of n linearly spaced numbers from start to end <br>
+    !> 从 start 到 end 构造一个 n 个线性间隔的数字向量
+    pure function linspace_rk(start, end, n) result(v)
+        real(rk), intent(in) :: start, end
+        integer, intent(in) :: n
+        real(rk) :: v(max(n, 0))
+
+        real(rk) :: step
+        integer :: i
+
+        if (n <= 0) then
+            return
+        elseif (n == 1) then
+            v(1) = start
+            return
+        end if
+
+        step = (end - start)/(n - 1)
+        do concurrent(i=1:n)
+            v(i) = start + (i - 1)*step
+        end do
+
+    end function linspace_rk
+
+    !> returns a vector of n linearly spaced integers from start to end <br>
+    !> 从 start 到 end 构造一个 n 个线性间隔的整数向量
+    pure function linspace_ik(start, end, n) result(v)
+        integer, intent(in) :: start, end
+        integer, intent(in) :: n
+        integer :: v(max(n, 0))
+
+        integer :: step
+        integer :: i
+
+        if (n <= 0) then
+            return
+        elseif (n == 1) then
+            v(1) = start
+            return
+        end if
+
+        step = (end - start)/(n - 1)
+        do concurrent(i=1:n)
+            v(i) = start + (i - 1)*step
+        end do
+
+    end function linspace_ik
 
 end module seakeeping_math
