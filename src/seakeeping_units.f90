@@ -10,7 +10,7 @@ module seakeeping_units
     implicit none
     private
 
-    public :: r2d, d2r, kn, ms
+    public :: r2d, d2r, ms2kn, kn2ms
     real(rk), parameter :: r2dx = 180.0_rk/Pi
     real(rk), parameter :: d2rx = Pi/180.0_rk
 
@@ -36,20 +36,20 @@ contains
 
     !> Convert knots to m/s <br>
     !> 节转换为米/秒
-    elemental real(rk) function ms(v)
+    elemental real(rk) function kn2ms(v)
         real(rk), intent(in) :: v
 
-        ms = v*0.514444_rk
+        kn2ms = v*0.514444_rk
 
-    end function ms
+    end function kn2ms
 
     !> Convert m/s to knots <br>
     !> 米/秒转换为节
-    elemental real(rk) function kn(v)
+    elemental real(rk) function ms2kn(v)
         real(rk), intent(in) :: v
 
-        kn = v/0.514444_rk
+        ms2kn = v/0.514444_rk
 
-    end function kn
+    end function ms2kn
 
 end module seakeeping_units
