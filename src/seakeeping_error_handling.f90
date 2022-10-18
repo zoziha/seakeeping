@@ -20,11 +20,11 @@ contains
 
     !> File not found error <br>
     !> 文件未找到错误
-    subroutine file_not_found_error(file_name)
-        character(*), intent(in) :: file_name   !! file name <br>
-                                                !! 文件名
+    subroutine file_not_found_error(file)
+        character(*), intent(in) :: file    !! file name <br>
+                                            !! 文件名
 
-        write (error_unit, '(2a)') 'FileNotFoundError: ', file_name
+        write (error_unit, '(2a)') 'FileNotFoundError: ', file
         stop file_not_found_error_code
 
     end subroutine file_not_found_error
@@ -42,13 +42,13 @@ contains
 
     !> File parse error <br>
     !> 文件解析错误
-    subroutine file_parse_error(file_name, msg)
-        character(*), intent(in) :: file_name   !! file name <br>
-                                                !! 文件名
-        character(*), intent(in) :: msg         !! error message <br>
-                                                !! 错误信息
+    subroutine file_parse_error(file, msg)
+        character(*), intent(in) :: file    !! file name <br>
+                                            !! 文件名
+        character(*), intent(in) :: msg     !! error message <br>
+                                            !! 错误信息
 
-        write (error_unit, '(4a)') 'FileParseError: ', file_name, ', ', msg
+        write (error_unit, '(4a)') 'FileParseError: ', file, ', ', msg
         stop file_parse_error_code
 
     end subroutine file_parse_error

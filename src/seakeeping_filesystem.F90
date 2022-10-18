@@ -18,20 +18,20 @@ contains
 
     !> Inquire whether a file/directory exists <br>
     !> 查询文件 / 文件夹路径是否存在
-    impure elemental logical function is_exist(file_name, dir)
-        character(*), intent(in) :: file_name   !! file name <br>
-                                                !! 文件 / 文件夹名称
-        logical, intent(in), optional :: dir    !! is directory ? <br>
-                                                !! 是否为文件夹 ?
+    impure elemental logical function is_exist(file, dir)
+        character(*), intent(in) :: file    !! file name <br>
+                                            !! 文件 / 文件夹名称
+        logical, intent(in), optional :: dir!! is directory ? <br>
+                                            !! 是否为文件夹 ?
 #if defined __INTEL_COMPILER
         if (present(dir)) then
             if (dir) then
-                inquire (directory=file_name, exist=is_exist)
+                inquire (directory=file, exist=is_exist)
                 return
             end if
         end if
 #endif
-        inquire (file=file_name, exist=is_exist)
+        inquire (file=file, exist=is_exist)
 
     end function is_exist
 
@@ -55,12 +55,12 @@ contains
 
     !> Counts the line number of text file <br>
     !> 计算文本文件行数
-    impure integer function countlines(file_name)
-        character(*), intent(in) :: file_name   !! file name <br>
-                                                !! 文件名称
+    impure integer function countlines(file)
+        character(*), intent(in) :: file    !! file name <br>
+                                            !! 文件名称
         integer :: istat, iunit
 
-        open (newunit=iunit, file=file_name, status='old')
+        open (newunit=iunit, file=file, status='old')
         countlines = 0
         do
             read (iunit, *, iostat=istat)
