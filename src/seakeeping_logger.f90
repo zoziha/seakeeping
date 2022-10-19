@@ -1,3 +1,4 @@
+!! 开源协议：MIT，版权归 Fortran-lang 组织
 !> date: 2022-10-19
 !> author: Fortran-lang
 !> @note https://github.com/fortran-lang/stdlib
