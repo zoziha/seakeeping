@@ -23,6 +23,7 @@ module seakeeping
     use seakeeping_wave
     use seakeeping_units
     use seakeeping_utils
+    use seakeeping_logger
     implicit none
 
 end module seakeeping

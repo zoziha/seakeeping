@@ -21,8 +21,6 @@ module seakeeping_math
         procedure :: linspace_ik, linspace_rk
     end interface linspace
 
-    complex(rk), parameter :: zero_cmplx = (0.0_rk, 0.0_rk)
-
 contains
 
     !> Cross product <br>
@@ -42,6 +40,7 @@ contains
     !> @note cmplx%re 需要 gfortran 9 以上支持
     elemental real(rk) function arg(z)
         complex(rk), intent(in) :: z
+        complex(rk), parameter :: zero_cmplx = (0.0_rk, 0.0_rk)
 
         if (z == zero_cmplx) then
             arg = 0.0_rk

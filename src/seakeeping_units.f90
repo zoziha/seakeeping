@@ -11,8 +11,6 @@ module seakeeping_units
     private
 
     public :: r2d, d2r, ms2kn, kn2ms
-    real(rk), parameter :: r2dx = 180.0_rk/Pi
-    real(rk), parameter :: d2rx = Pi/180.0_rk
 
 contains
 
@@ -20,6 +18,7 @@ contains
     !> 弧度转换为度
     elemental real(rk) function r2d(r)
         real(rk), intent(in) :: r
+        real(rk), parameter :: r2dx = 180.0_rk/Pi
 
         r2d = r*r2dx
 
@@ -29,6 +28,7 @@ contains
     !> 度转换为弧度
     elemental real(rk) function d2r(d)
         real(rk), intent(in) :: d
+        real(rk), parameter :: d2rx = Pi/180.0_rk
 
         d2r = d*d2rx
 

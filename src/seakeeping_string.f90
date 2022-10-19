@@ -10,7 +10,7 @@ module seakeeping_string
     implicit none
     private
 
-    public :: to_string, newline
+    public :: to_string, newline, to_lower
 
 contains
 
@@ -56,5 +56,44 @@ contains
         end select
 
     end function to_string
+
+    !> Make a string lowercase <br>
+    !> 将字符串转为小写
+    pure function to_lower(x, reverse) result(y)
+        character(*), intent(in) :: x               !! Input string <br>
+                                                    !! 输入字符串
+        logical, intent(in), optional :: reverse    !! Whether to convert to uppercase <br>
+                                                    !! 是否转为大写
+        character(*), parameter :: uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        character(*), parameter :: lowercase = "abcdefghijklmnopqrstuvwxyz"
+        character(len(x)) :: y
+        integer :: i, k
+
+        if (present(reverse)) then
+            if (reverse) then
+
+                do concurrent(i=1:len(x))
+                    k = index(lowercase, x(i:i))
+                    if (k > 0) then
+                        y(i:i) = uppercase(k:k)
+                    else
+                        y(i:i) = x(i:i)
+                    end if
+                end do
+                return
+
+            end if
+        end if
+
+        do concurrent(i=1:len(x))
+            k = index(uppercase, x(i:i))
+            if (k > 0) then
+                y(i:i) = lowercase(k:k)
+            else
+                y(i:i) = x(i:i)
+            end if
+        end do
+
+    end function to_lower
 
 end module seakeeping_string
