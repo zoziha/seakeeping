@@ -7,10 +7,7 @@ module seakeeping_statics
 
     use seakeeping_kinds, only: rk
     use seakeeping_constants, only: g
-    implicit none
-    private
-
-    public :: hsp, TPC
+    private :: rk, g
 
 contains
 

@@ -6,10 +6,7 @@
 module seakeeping_kinds
 
     use, intrinsic :: iso_fortran_env, only: real32, real64
-    implicit none
-    private
-
-    public :: rk
+    private :: real32, real64
 
 #ifdef REAL32
     integer, parameter :: rk = real32

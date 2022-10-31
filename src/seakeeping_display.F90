@@ -7,10 +7,7 @@ module seakeeping_display
 
     use, intrinsic :: iso_fortran_env, only: output_unit
     use seakeeping_kinds, only: rk
-    implicit none
-    private
-
-    public :: disp
+    private :: rk, output_unit
 
 contains
 

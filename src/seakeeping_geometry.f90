@@ -8,18 +8,17 @@ module seakeeping_geometry
 
     use seakeeping_kinds, only: rk
     use seakeeping_math, only: heron_formula
-    implicit none
-    private
-
-    public :: centroid, area, distance
+    private :: rk, heron_formula
 
     interface centroid
         procedure :: centroid3l, centroid4l
     end interface centroid
+    private :: centroid3l, centroid4l
 
     interface area
         procedure :: area3l, area4l
     end interface area
+    private :: area3l, area4l
 
 contains
 

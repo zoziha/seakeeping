@@ -6,10 +6,7 @@
 module seakeeping_time
 
     use seakeeping_kinds, only: rk
-    implicit none
-    private
-
-    public :: tic, toc, now
+    private :: rk
 
 contains
 

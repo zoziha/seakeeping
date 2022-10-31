@@ -7,22 +7,22 @@ module seakeeping_utils
 
     use, intrinsic :: iso_c_binding, only: c_int
     use seakeeping_kinds, only: rk
-    implicit none
-    private
-
-    public :: swap, incr, optval, isatty, env_color, bubble_sort
+    private :: rk, c_int
 
     interface incr
         procedure :: incr_ik, incr_rk
     end interface incr
+    private :: incr_ik, incr_rk
 
     interface swap
         procedure :: swap_ik, swap_rk
     end interface swap
+    private :: swap_ik, swap_rk
 
     interface optval
         procedure :: optval_ik, optval_rk, optval_lk
     end interface optval
+    private :: optval_ik, optval_rk, optval_lk
 
     ! 从 Fortran-lang/fpm 借鉴来的 TTY 检测，GFortran 自带的终端检测在 Windows 下不可用
     interface

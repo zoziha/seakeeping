@@ -7,10 +7,7 @@ module seakeeping_string
 
     use, intrinsic :: iso_c_binding, only: newline => c_new_line
     use seakeeping_kinds, only: rk
-    implicit none
-    private
-
-    public :: to_string, newline, to_lower
+    private :: rk
 
 contains
 

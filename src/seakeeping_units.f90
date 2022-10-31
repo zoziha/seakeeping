@@ -7,10 +7,7 @@ module seakeeping_units
 
     use seakeeping_kinds, only: rk
     use seakeeping_constants, only: Pi
-    implicit none
-    private
-
-    public :: r2d, d2r, ms2kn, kn2ms
+    private :: rk, Pi
 
 contains
 

@@ -51,7 +51,6 @@ module seakeeping_logger
     use seakeeping_error_handling, only: error_stop => fatal_error
     use seakeeping_string, only: to_lower
     use seakeeping_time, only: time_stamp => now
-    implicit none
 
     private
     public :: global_logger, logger_t

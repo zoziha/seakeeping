@@ -8,18 +8,17 @@ module seakeeping_math
     use, intrinsic :: ieee_arithmetic, only: ieee_is_nan
     use seakeeping_kinds, only: rk
     use seakeeping_constants, only: g, Pi, sqrt_eps
-    implicit none
-    private
-
-    public :: cross_product, arg, heron_formula, angle, arange, linspace, is_close, unitize
+    private :: ieee_is_nan, rk, g, Pi, sqrt_eps
 
     interface arange
         procedure :: arange_ik, arange_rk
     end interface arange
+    private :: arange_ik, arange_rk
 
     interface linspace
         procedure :: linspace_ik, linspace_rk
     end interface linspace
+    private :: linspace_ik, linspace_rk
 
 contains
 

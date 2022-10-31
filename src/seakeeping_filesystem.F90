@@ -4,15 +4,10 @@
 !> Filesystem for seakeeping
 module seakeeping_filesystem
 
-    implicit none
-    private
-
-    public :: is_exist, countlines, operator(.join.), is_windows, windows_path, &
-              mkdir, rmdir
-
     interface operator(.join.)
         procedure :: join_path
     end interface
+    private :: join_path
 
 contains
 

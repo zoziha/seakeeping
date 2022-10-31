@@ -8,14 +8,12 @@ module seakeeping_linalg
 
     use seakeeping_kinds, only: rk
     use seakeeping_utils, only: optval
-    implicit none
-    private
-
-    public :: diag, eye
+    private :: optval, rk
 
     interface diag
         procedure :: diag_real_rank2, diag_real_rank1
     end interface diag
+    private :: diag_real_rank2, diag_real_rank1
 
 contains
 

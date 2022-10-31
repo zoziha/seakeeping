@@ -6,15 +6,12 @@
 module seakeeping_error_handling
 
     use, intrinsic :: iso_fortran_env, only: error_unit
-    implicit none
-    private
+    private :: error_unit
 
-    public :: file_not_found_error, internal_error, file_parse_error, fatal_error, check
-
-    integer, parameter :: interal_error_code = -1
-    integer, parameter :: fatal_error_code = -2
-    integer, parameter :: file_not_found_error_code = -3
-    integer, parameter :: file_parse_error_code = -4
+    integer, parameter, private :: interal_error_code = -1
+    integer, parameter, private :: fatal_error_code = -2
+    integer, parameter, private :: file_not_found_error_code = -3
+    integer, parameter, private :: file_parse_error_code = -4
 
 contains
 

@@ -6,10 +6,7 @@
 module seakeeping_constants
 
     use seakeeping_kinds, only: rk
-    implicit none
-    private
-
-    public :: g, Pi, rho_sw, rho_fw, rho_air, p_atm, sqrt_eps
+    private :: rk
 
     real(rk), parameter :: g = 9.806_rk             !! Gravity acceleration <br>
                                                     !! 重力加速度

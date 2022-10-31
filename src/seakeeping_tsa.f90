@@ -9,10 +9,7 @@ module seakeeping_tsa
 
     use seakeeping_constants, only: Pi
     use seakeeping_kinds, only: rk
-    implicit none
-    private
-
-    public :: AMPD, ffti, fft, fftshift
+    private :: rk, Pi
 
 contains
 

@@ -9,10 +9,7 @@ module seakeeping_wave
 
     use seakeeping_kinds, only: rk
     use seakeeping_constants, only: g, Pi
-    implicit none
-    private
-
-    public :: k01, k02, we, wlr, wf, wenergy, zeta
+    private :: rk, g, Pi
 
 contains
 
