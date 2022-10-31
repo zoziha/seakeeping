@@ -28,7 +28,7 @@ module seakeeping_utils
     interface
         function isatty() bind(c, name='c_isatty')
             import :: c_int
-            integer(c_int) :: c_isatty
+            integer(c_int) :: isatty
         end function isatty
     end interface
 
