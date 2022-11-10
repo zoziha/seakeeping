@@ -16,7 +16,7 @@ module seakeeping_constants
                                                     !! 海水密度
     real(rk), parameter :: rho_fw = 1000.0_rk       !! Density of freshwater <br>
                                                     !! 水密度
-    real(rk), parameter :: rho_air = 1.225_rk       !! Density of air <br>
+    real(rk), parameter :: rho_air = 1.205_rk       !! Density of air <br>
                                                     !! 空气密度
     real(rk), parameter :: p_atm = 101325.0_rk      !! Atmospheric pressure <br>
                                                     !! 大气压力
