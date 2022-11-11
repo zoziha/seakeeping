@@ -15,14 +15,15 @@ module seakeeping
     use seakeeping_geometry
     use seakeeping_kinds
     use seakeeping_linalg
+    use seakeeping_logger
     use seakeeping_math
     use seakeeping_statics
+    use seakeeping_stats
     use seakeeping_string
     use seakeeping_time
     use seakeeping_tsa
     use seakeeping_wave
     use seakeeping_units
     use seakeeping_utils
-    use seakeeping_logger
 
 end module seakeeping
