@@ -15,6 +15,51 @@
 
 备注：基于 `fpm` 程序的模块抖落特性，没有被 `use` 的模块将不参与源码编译，可以相对提高编译效率。
 
+## 选择性编译
+
+`fpm` 支持树抖落特性，可以通过 `-no-prune` 选项控制，默认是开启的。同时，`fpm` 从 `0.7.0` 开始支持了预处理器。
+
+若需要完整地单独构建本包为链接库 `seakeeping`，可以使用以下 `flag`：
+
+```sh
+cd seakeeping
+fpm build --flag "-cpp" --link-flag "-lopenblas"           # ifort 将 -cpp 换成 -fpp
+fpm build --flag "-cpp -DREAL32" --link-flag "-lopenblas"  # 编译单精度链接库
+```
+
+此处的 `openblas` 根据自己的需求可以换成 `lapack`、`blas` 或其他。
+
+若需要在其他 `fpm` 项目中引用 `seakeeping` 包，可以启用树抖落命令，在顶级 app 项目的 `fpm.toml` 中声明：
+
+**启用 openblas**
+
+```toml
+[build]
+link = ['openblas']  # 或者 link = ['blas', 'lapack']
+```
+
+对应：`--link-flag "-lopenblas"` 或者 `--link-flag "-llapack -lblas"`。
+
+**启用预处理器**
+
+```toml
+[preprocess]
+[preprocess.cpp]
+```
+
+对应：gfortran，`--flag "-cpp"`；ifort（Unix），`--flag "-fpp"`；ifort（Windows），`--flag "/fpp"`。
+
+**使用单精度**
+
+```toml
+[preprocess]
+[preprocess.cpp]
+macros = ['REAL32']
+```
+
+对应：`--flag "-cpp REAL32"`。
+
+
 ## 其他包
 
 这里列举其他适用于船舶耐波性问题的包：
@@ -24,7 +69,6 @@
 - fgsl/gsl：通用数学函数；
 - toml-f：配置文件，终端；
 - M_CLI2：命令行；
-- openblas：线性代数；
 - test-drive：单元测试；
 - root-fortran：根查找；
 - polyroot-fortran：多项式根查找；

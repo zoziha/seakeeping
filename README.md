@@ -15,6 +15,50 @@ Therefore, this package is formed to express and calculate the seakeeping proble
 
 Note: Based on the module shake-off feature of the `fpm` program, modules that are not `use` will not participate in the source code compilation, which can relatively improve the compilation efficiency.
 
+## Selective compilation
+
+`fpm` supports tree shattering feature, which can be controlled by the `-no-prune` option, which is enabled by default. Meanwhile, `fpm` supports preprocessors since `0.7.0`.
+
+If you need to build this package completely as a link library `seakeeping`, you can use the following `flag`:
+
+````sh
+cd seakeeping
+fpm build --flag "-cpp" --link-flag "-lopenblas"          # ifort replaces -cpp with -fpp
+fpm build --flag "-cpp -DREAL32" --link-flag "-lopenblas" # Compile single precision link library
+````
+
+The `openblas` here can be changed to `lapack`, `blas` or others according to your own needs.
+
+If you need to reference the `seakeeping` package in other `fpm` projects, you can enable the tree shaking command, declared in the `fpm.toml` of the top-level app project:
+
+**Enable openblas**
+
+````toml
+[build]
+link = ['openblas'] # or link = ['blas', 'lapack']
+````
+
+Corresponding: `--link-flag "-lopenblas"` or `--link-flag "-llapack -lblas"`.
+
+**Enable preprocessor**
+
+````toml
+[preprocess]
+[preprocess.cpp]
+````
+
+Corresponds to: gfortran, `--flag "-cpp"`; ifort (Unix), `--flag "-fpp"`; ifort (Windows), `--flag "/fpp"`.
+
+**Use single precision**
+
+````toml
+[preprocess]
+[preprocess.cpp]
+macros = ['REAL32']
+````
+
+Corresponds to: `--flag "-cpp REAL32"`.
+
 ## Other packages
 
 Here are other packages that are suitable for marine seakeeping issues:
@@ -24,7 +68,6 @@ Here are other packages that are suitable for marine seakeeping issues:
 - fgsl/gsl: general mathematical functions;
 - toml-f: configuration file, terminal;
 - M_CLI2: command line;
-- openblas: linear algebra;
 - test-drive: unit test;
 - root-fortran: root lookup;
 - polyroot-fortran: polynomial root search;
