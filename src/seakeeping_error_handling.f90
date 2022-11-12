@@ -8,10 +8,7 @@ module seakeeping_error_handling
     use, intrinsic :: iso_fortran_env, only: error_unit
     private :: error_unit
 
-    integer, parameter, private :: interal_error_code = -1
-    integer, parameter, private :: fatal_error_code = -2
-    integer, parameter, private :: file_not_found_error_code = -3
-    integer, parameter, private :: file_parse_error_code = -4
+    integer, parameter, private :: error_code(4) = [-1, -2, -3, -4]
 
 contains
 
@@ -22,7 +19,7 @@ contains
                                             !! 文件名
 
         write (error_unit, '(2a)') '*<FileNotFoundError>* ', file
-        stop file_not_found_error_code
+        stop error_code(3)
 
     end subroutine file_not_found_error
 
@@ -33,7 +30,7 @@ contains
                                           !! 错误信息
 
         write (error_unit, '(2a)') '*<InternalError>* ', msg
-        stop interal_error_code
+        stop error_code(1)
 
     end subroutine internal_error
 
@@ -46,7 +43,7 @@ contains
                                             !! 错误信息
 
         write (error_unit, '(4a)') '*<FileParseError>* ', file, ', ', msg
-        stop file_parse_error_code
+        stop error_code(4)
 
     end subroutine file_parse_error
 
@@ -57,7 +54,7 @@ contains
                                           !! 错误信息
 
         write (error_unit, '(2a)') '*<FatalError>* ', msg
-        stop fatal_error_code
+        stop error_code(2)
 
     end subroutine fatal_error
 
