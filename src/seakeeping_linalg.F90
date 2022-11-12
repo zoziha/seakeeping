@@ -21,14 +21,17 @@ module seakeeping_linalg
     interface inv
         procedure :: rinv, cinv
     end interface inv
+    private :: rinv, cinv
 
     interface gemm
         procedure :: rgemm, cgemmx
     end interface gemm
+    private :: rgemm, cgemmx
 
     interface solve
         procedure :: rsolve, csolve
     end interface solve
+    private :: rsolve, csolve
 
 contains
 
