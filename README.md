@@ -9,15 +9,18 @@
 [2]: https://github.com/fortran-lang/fpm
 [3]: https://fortran-lang.org/compilers
 
-Based on programming experience, writing more detailed and expressive code for a specific field helps to improve the readability, maintainability, and descriptiveness of the code from the bottom.
+Based on programming experience, writing more detailed and expressive code for a specific field helps
+to improve the readability, maintainability, and descriptiveness of the code from the bottom.
 
 Therefore, this package is formed to express and calculate the seakeeping problem of ships.
+Facts have proved that this package has indeed improved my coding efficiency and code reuse
 
 Note: Based on the module shake-off feature of the `fpm` program, modules that are not `use` will not participate in the source code compilation, which can relatively improve the compilation efficiency.
 
 ## Selective compilation
 
-`fpm` supports tree shattering feature, which can be controlled by the `-no-prune` option, which is enabled by default. Meanwhile, `fpm` supports preprocessors since `0.7.0`.
+`fpm` supports tree shattering feature, which can be controlled by the `-no-prune` option,
+which is enabled by default. Meanwhile, `fpm` supports preprocessors since `0.7.0`.
 
 If you need to build this package completely as a link library `seakeeping`, you can use the following `flag`:
 
@@ -29,7 +32,8 @@ fpm build --flag "-cpp -DREAL32" --link-flag "-lopenblas" # Compile single preci
 
 The `openblas` here can be changed to `lapack`, `blas` or others according to your own needs.
 
-If you need to reference the `seakeeping` package in other `fpm` projects, you can enable the tree shaking command, declared in the `fpm.toml` of the top-level app project:
+If you need to reference the `seakeeping` package in other `fpm` projects, you can enable the tree
+shaking command, declared in the `fpm.toml` of the top-level app project:
 
 **Enable openblas**
 
@@ -63,7 +67,7 @@ Corresponds to: `--flag "-cpp REAL32"`.
 
 Here are other packages that are suitable for marine seakeeping issues:
 
-- minpack: solve nonlinear equations;
+- minpack/nlopt-f: solve nonlinear equations;
 - fftw/fftpack: Fast Fourier Transform;
 - fgsl/gsl: general mathematical functions;
 - toml-f: configuration file, terminal;
@@ -71,6 +75,9 @@ Here are other packages that are suitable for marine seakeeping issues:
 - test-drive: unit test;
 - root-fortran: root lookup;
 - polyroot-fortran: polynomial root search;
+- quadrature-fortran: multidimensional Gauss-Legendre integral;
+- VTKFortran/H5part: storage and visualization;
 - Source Codes in Fortran90: Fortran 90 code.
 
-In addition, there are analysis of CAE models and visualization of numerical models, and technical details such as function integration, statistics, sorting, special functions, etc.
+In addition, there are analysis of CAE models and visualization of numerical models,
+and technical details such as function integration, statistics, sorting, special functions, etc.
