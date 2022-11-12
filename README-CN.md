@@ -1,8 +1,8 @@
 # 船舶耐波性包
 
-[![seakeeping](https://img.shields.io/badge/seakeeping-v1.3.0-blueviolet)][1]
+[![seakeeping](https://img.shields.io/badge/seakeeping-v1.4.0-blueviolet)][1]
 [![license](https://img.shields.io/badge/License-BSD--3-important)](LICENSE)
-[![fpm](https://img.shields.io/badge/Fortran--lang/fpm-^0.7.0-blue)][2]
+[![fpm](https://img.shields.io/badge/Fortran--lang/fpm-^0.6.0-blue)][2]
 [![Compiler](https://img.shields.io/badge/Compiler-GFortran^10.3.0-brightgreen)][3]
 
 [1]: https://gitee.com/ship-motions/seakeeping
