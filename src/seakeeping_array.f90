@@ -4,7 +4,7 @@
 !>
 !> Seakeeping linear algebra <br>
 !> 耐波性线性代数
-module seakeeping_linalg
+module seakeeping_array
 
     use seakeeping_kinds, only: rk
     use seakeeping_utils, only: optval
@@ -67,4 +67,4 @@ contains
 
     end function eye
 
-end module seakeeping_linalg
+end module seakeeping_array
