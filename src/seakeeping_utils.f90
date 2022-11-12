@@ -5,9 +5,8 @@
 !> 耐波性工具
 module seakeeping_utils
 
-    use, intrinsic :: iso_c_binding, only: c_int
     use seakeeping_kinds, only: rk
-    private :: rk, c_int
+    private :: rk
 
     interface incr
         procedure :: incr_ik, incr_rk
@@ -23,14 +22,6 @@ module seakeeping_utils
         procedure :: optval_ik, optval_rk, optval_lk
     end interface optval
     private :: optval_ik, optval_rk, optval_lk
-
-    ! 从 Fortran-lang/fpm 借鉴来的 TTY 检测，GFortran 自带的终端检测在 Windows 下不可用
-    interface
-        function isatty() bind(c, name='c_isatty')
-            import :: c_int
-            integer(c_int) :: isatty
-        end function isatty
-    end interface
 
 contains
 
@@ -131,21 +122,23 @@ contains
 
     end function optval_lk
 
-    !> Get the value of the environment variable NO_COLOR to determine whether to enable console color <br>
-    !> 获取环境变量 NO_COLOR 的值，确定是否启用控制台颜色
-    !> @note NO_COLOR 存在，则 env_color 返回 .false.
-    logical function env_color()
-        integer :: color_status
-        character(len=128) :: color_value
+    !> 查询 key 是否存在与环境变量，如果存在则返回其值，否则返回默认值。
+    !> @note 可使用 len(optenv('key', '')) == 0 以判断 key 在环境变量中不存在
+    impure function optenv(key, default)
+        character(*), intent(in) :: key       !! 名
+        character(*), intent(in) :: default   !! 值
+        character(:), allocatable :: optenv
+        integer :: stat
+        character(len=128) :: value
 
-        call get_environment_variable("NO_COLOR", color_value, status=color_status)
-        if (color_status == 0) then
-            env_color = .false.
+        call get_environment_variable(key, value, status=stat)
+        if (stat == 0) then
+            optenv = default
         else
-            env_color = .true.
+            optenv = trim(value)
         end if
 
-    end function env_color
+    end function optenv
 
     !> Bubble sort <br>
     !> 冒泡排序
