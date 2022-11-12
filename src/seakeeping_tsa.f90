@@ -9,7 +9,8 @@ module seakeeping_tsa
 
     use seakeeping_constants, only: Pi
     use seakeeping_kinds, only: rk
-    private :: rk, Pi
+    use seakeeping_utils, only: optval
+    private :: rk, Pi, step, optval
 
 contains
 
@@ -32,11 +33,7 @@ contains
         logical :: extend_
         real(rk), allocatable :: data_(:)
 
-        if (present(extend)) then
-            extend_ = extend
-        else
-            extend_ = .false.
-        end if
+        extend_ = optval(extend, .false.)
 
         ! 确定最佳窗体宽度
         N = size(data)

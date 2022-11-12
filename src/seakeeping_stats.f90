@@ -2,6 +2,7 @@
 module seakeeping_stats
 
     use seakeeping_kinds, only: rk
+    private :: rk
 
 contains
 

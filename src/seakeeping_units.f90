@@ -35,7 +35,7 @@ contains
     !> 节转换为米/秒
     elemental real(rk) function kn2ms(v)
         real(rk), intent(in) :: v
-        real(rk), parameter :: para = 1852.0_rk/3600_rk
+        real(rk), parameter :: para = 1852.0_rk/3600.0_rk
 
         kn2ms = v*para
 
@@ -45,7 +45,7 @@ contains
     !> 米/秒转换为节
     elemental real(rk) function ms2kn(v)
         real(rk), intent(in) :: v
-        real(rk), parameter :: para = 3600_rk/1852.0_rk
+        real(rk), parameter :: para = 3600.0_rk/1852.0_rk
 
         ms2kn = v*para
 
