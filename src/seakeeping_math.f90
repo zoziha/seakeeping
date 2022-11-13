@@ -61,6 +61,15 @@ contains
 
     end function heron_formula
 
+    !> 欧拉公式
+    elemental complex(rk) function euler_formula(x)
+        real(rk), intent(in) :: x
+
+        euler_formula%re = cos(x)
+        euler_formula%im = sin(x)
+
+    end function euler_formula
+
     !> Calculate the angle of two vectors <br>
     !> 计算两向量的夹角
     pure real(rk) function angle(x, y)

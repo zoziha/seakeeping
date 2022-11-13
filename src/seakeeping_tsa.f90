@@ -90,9 +90,9 @@ contains
         real(rk) :: aw, arg
         integer :: i
 
-        aw = 2*pi/real(n, rk)
+        aw = 2*pi/n
         do concurrent(i=1:n/2)
-            arg = aw*real(i - 1, rk)
+            arg = aw*(i - 1)
             w(2*i - 1) = cos(arg)
             w(2*i) = sin(arg)
         end do
