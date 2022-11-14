@@ -61,7 +61,7 @@ Corresponds to: gfortran, `--flag "-cpp"`; ifort (Unix), `--flag "-fpp"`; ifort 
 macros = ['REAL32']
 ````
 
-Corresponds to: `--flag "-cpp REAL32"`.
+Corresponds to: `--flag "-cpp DREAL32"`.
 
 ## Other packages
 

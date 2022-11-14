@@ -57,7 +57,7 @@ link = ['openblas']  # 或者 link = ['blas', 'lapack']
 macros = ['REAL32']
 ```
 
-对应：`--flag "-cpp REAL32"`。
+对应：`--flag "-cpp DREAL32"`。
 
 
 ## 其他包
