@@ -245,4 +245,20 @@ contains
 
     end function linspace_ik
 
+    !> 一元二次方程求根公式
+    pure subroutine root_formula(a, b, c, x1, x2)
+        real(rk), intent(in) :: a, b, c
+        real(rk), intent(out), optional :: x1, x2
+
+        if (b*b - 4*a*c < 0) return
+        if (a > 0) then
+            if (present(x1)) x1 = (-b - sqrt(b*b - 4*a*c))/(2*a)
+            if (present(x2)) x2 = (-b + sqrt(b*b - 4*a*c))/(2*a)
+        else
+            if (present(x1)) x1 = (-b + sqrt(b*b - 4*a*c))/(2*a)
+            if (present(x2)) x2 = (-b - sqrt(b*b - 4*a*c))/(2*a)
+        end if
+
+    end subroutine root_formula
+
 end module seakeeping_math
