@@ -5,7 +5,7 @@ src_dir: src
 preprocess: false
 project_website: https://gitee.com/ship-motions/seakeeping
 project_download: https://gitee.com/ship-motions/seakeeping/releases
-output_dir: API-html
+output_dir: doc/API-html
 page_dir: doc
 media_dir: media
 author: 左志华

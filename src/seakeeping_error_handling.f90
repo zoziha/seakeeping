@@ -19,7 +19,7 @@ contains
                                             !! 文件名
 
         write (error_unit, '(2a)') '*<FileNotFoundError>* ', file
-        stop error_code(3)
+        stop error_code(2)
 
     end subroutine file_not_found_error
 
@@ -43,18 +43,22 @@ contains
                                             !! 错误信息
 
         write (error_unit, '(4a)') '*<FileParseError>* ', file, ', ', msg
-        stop error_code(4)
+        stop error_code(3)
 
     end subroutine file_parse_error
 
     !> Fatal error <br>
     !> 致命错误
-    subroutine fatal_error(msg)
-        character(*), intent(in) :: msg   !! error message <br>
-                                          !! 错误信息
+    subroutine fatal_error(msg, code)
+        character(*), intent(in) :: msg         !! 错误信息
+        integer, intent(in), optional :: code   !! 错误代码
 
         write (error_unit, '(2a)') '*<FatalError>* ', msg
-        stop error_code(2)
+        if (present(code)) then
+            stop code
+        else
+            stop error_code(4)
+        end if
 
     end subroutine fatal_error
 
