@@ -1,18 +1,16 @@
 ---
-project: seakeeping
+project: Seakeeping
 summary: 船舶耐波性例程
 src_dir: src
 preprocess: false
 project_website: https://gitee.com/ship-motions/seakeeping
 project_download: https://gitee.com/ship-motions/seakeeping/releases
 output_dir: doc/API-html
-page_dir: doc
-media_dir: media
 author: 左志华
 author_description: 哈尔滨工程大学-船舶与海洋结构物设计制造，在读学生
 email: zuo.zhihua@qq.com
 website: https://gitee.com/zoziha
-author_pic: media/zoziha.png
+author_pic: https://s2.loli.net/2022/11/18/pJyQH39mYFU4wET.png
 display: public
 graph: false
 source: true
