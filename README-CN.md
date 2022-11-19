@@ -24,8 +24,8 @@
 
 ```sh
 cd seakeeping
-fpm build --flag "-cpp" --link-flag "-lopenblas"           # ifort 将 -cpp 换成 -fpp
-fpm build --flag "-cpp -DREAL32" --link-flag "-lopenblas"  # 编译单精度链接库
+fpm build --flag "-cpp"           # ifort 将 -cpp 换成 -fpp
+fpm build --flag "-cpp -DREAL32"  # 编译单精度链接库
 ```
 
 此处的 `openblas` 根据自己的需求可以换成 `lapack`、`blas` 或其他。
@@ -38,8 +38,6 @@ fpm build --flag "-cpp -DREAL32" --link-flag "-lopenblas"  # 编译单精度链�
 [build]
 link = ['openblas']  # 或者 link = ['blas', 'lapack']
 ```
-
-对应：`--link-flag "-lopenblas"` 或者 `--link-flag "-llapack -lblas"`。
 
 **启用预处理器**
 

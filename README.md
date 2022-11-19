@@ -27,8 +27,8 @@ If you need to build this package completely as a link library `seakeeping`, you
 
 ````sh
 cd seakeeping
-fpm build --flag "-cpp" --link-flag "-lopenblas"          # ifort replaces -cpp with -fpp
-fpm build --flag "-cpp -DREAL32" --link-flag "-lopenblas" # Compile single precision link library
+fpm build --flag "-cpp"          # ifort replaces -cpp with -fpp
+fpm build --flag "-cpp -DREAL32" # Compile single precision link library
 ````
 
 The `openblas` here can be changed to `lapack`, `blas` or others according to your own needs.
@@ -42,8 +42,6 @@ shaking command, declared in the `fpm.toml` of the top-level app project:
 [build]
 link = ['openblas'] # or link = ['blas', 'lapack']
 ````
-
-Corresponding: `--link-flag "-lopenblas"` or `--link-flag "-llapack -lblas"`.
 
 **Enable preprocessor**
 
