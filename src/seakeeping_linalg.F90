@@ -14,9 +14,7 @@
 module seakeeping_linalg
 
     use seakeeping_kinds, only: rk
-    use seakeeping_error_handling, only: fatal_error
-    use seakeeping_string, only: to_string
-    private :: rk, fatal_error, to_string
+    private :: rk
 
     interface inv
         procedure :: rinv, cinv
@@ -45,19 +43,9 @@ contains
         b = a
         ! http://www.netlib.org/lapack/explore-html/d8/ddc/group__real_g_ecomputational_ga8d99c11b94db3d5eac75cac46a0f2e17.html
         call dgetrf(size(a, 1), size(a, 2), b, size(a, 1), ipiv, info)
-        if (info < 0) then
-            call fatal_error('dgetrf: illegal value in argument '//to_string(info))
-        else if (info > 0) then
-            call fatal_error('dgetrf: singular matrix, U(i,i) is exactly zero, info = '//to_string(info))
-        end if
 
         ! http://www.netlib.org/lapack/explore-html/d8/ddc/group__real_g_ecomputational_ga1af62182327d0be67b1717db399d7d83.html
         call dgetri(size(a, 2), b, size(a, 1), ipiv, work, size(a, 2), info)
-        if (info < 0) then
-            call fatal_error('dgetri: illegal value in argument '//to_string(info))
-        else if (info > 0) then
-            call fatal_error('dgetri: singular matrix, U(i,i) is exactly zero, info = '//to_string(info))
-        end if
 
     end function rinv
 
@@ -71,19 +59,9 @@ contains
         b = a
         ! http://www.netlib.org/lapack/explore-html/d8/ddc/group__real_g_ecomputational_ga8d99c11b94db3d5eac75cac46a0f2e17.html
         call zgetrf(size(a, 1), size(a, 2), b, size(a, 1), ipiv, info)
-        if (info < 0) then
-            call fatal_error('zgetrf: illegal value in argument '//to_string(info))
-        else if (info > 0) then
-            call fatal_error('zgetrf: singular matrix, U(i,i) is exactly zero, info = '//to_string(info))
-        end if
 
         ! http://www.netlib.org/lapack/explore-html/d8/ddc/group__real_g_ecomputational_ga1af62182327d0be67b1717db399d7d83.html
         call zgetri(size(a, 2), b, size(a, 1), ipiv, work, size(a, 2), info)
-        if (info < 0) then
-            call fatal_error('zgetri: illegal value in argument '//to_string(info))
-        else if (info > 0) then
-            call fatal_error('zgetri: singular matrix, U(i,i) is exactly zero, info = '//to_string(info))
-        end if
 
     end function cinv
 
@@ -100,12 +78,6 @@ contains
         ! http://www.netlib.org/lapack/explore-html/d0/db8/group__real_g_esolve_ga3b05fb3999b3d7351cb3101a1fd28e78.html
         call dgesv(size(a, 1), size(b, 2), a_, size(a, 1), ipiv, x, size(b, 1), info)
 
-        if (info < 0) then
-            call fatal_error('dgesv: illegal value in argument '//to_string(info))
-        else if (info > 0) then
-            call fatal_error('dgesv: singular matrix, U(i,i) is exactly zero, info = '//to_string(info))
-        end if
-
     end function rsolve
 
     !> solve linear system of double precision
@@ -121,12 +93,6 @@ contains
         ! http://www.netlib.org/lapack/explore-html/d0/db8/group__real_g_esolve_ga3b05fb3999b3d7351cb3101a1fd28e78.html
         call zgesv(size(a, 1), size(b, 2), a_, size(a, 1), ipiv, x, size(b, 1), info)
 
-        if (info < 0) then
-            call fatal_error('zgesv: illegal value in argument '//to_string(info))
-        else if (info > 0) then
-            call fatal_error('zgesv: singular matrix, U(i,i) is exactly zero, info = '//to_string(info))
-        end if
-
     end function csolve
 
     !> calculate determinant of a double precision matrix
@@ -139,11 +105,6 @@ contains
         a_ = a
         ! http://www.netlib.org/lapack/explore-html/d8/ddc/group__real_g_ecomputational_ga8d99c11b94db3d5eac75cac46a0f2e17.html
         call dgetrf(size(a, 1), size(a, 2), a_, size(a, 1), ipiv, info)
-        if (info < 0) then
-            call fatal_error('dgetrf: illegal value in argument '//to_string(info))
-        else if (info > 0) then
-            call fatal_error('dgetrf: singular matrix, U(i,i) is exactly zero, info = '//to_string(info))
-        end if
 
         d = 1.0_rk
         do i = 1, size(a, 2)
