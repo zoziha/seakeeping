@@ -82,4 +82,14 @@ contains
 
     end function distance
 
+    !> Unitize a vector <br>
+    !> 单位化向量
+    pure function unitize(x) result(y)
+        real(rk), intent(in), dimension(3) :: x
+        real(rk), dimension(3) :: y
+
+        y = x/distance(x)
+
+    end function unitize
+
 end module seakeeping_geometry

@@ -187,16 +187,6 @@ contains
 
     end function is_close
 
-    !> Unitize a vector <br>
-    !> 单位化向量
-    pure function unitize(x) result(y)
-        real(rk), intent(in), dimension(3) :: x
-        real(rk), dimension(3) :: y
-
-        y = x/sqrt(sum(x*x))
-
-    end function unitize
-
     !> constructs a vector of n linearly spaced numbers from start to end <br>
     !> 从 start 到 end 构造一个 n 个线性间隔的数字向量
     pure function linspace_rk(start, end, n) result(v)
