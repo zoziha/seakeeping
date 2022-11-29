@@ -48,7 +48,7 @@ module seakeeping_logger
 !! indicates that at least one of the writes to `log_units` failed.
 
     use, intrinsic :: iso_fortran_env, only: stderr => error_unit, stdin => input_unit, stdout => output_unit
-    use seakeeping_error_handling, only: error_stop => fatal_error
+    use seakeeping_error, only: error_stop => panic
     use seakeeping_string, only: to_lower
     use seakeeping_time, only: time_stamp => now
 

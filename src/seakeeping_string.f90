@@ -5,7 +5,6 @@
 !> 耐波心性字符串
 module seakeeping_string
 
-    use, intrinsic :: iso_c_binding, only: newline => c_new_line
     use seakeeping_kinds, only: rk
     private :: rk
 
