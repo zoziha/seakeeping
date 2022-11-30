@@ -1,9 +1,8 @@
 !> 耐波性典型错误处理
 module seakeeping_error
 
-    use, intrinsic :: iso_c_binding, only: new_line => c_new_line
     use, intrinsic :: iso_fortran_env, only: error_unit
-    private :: new_line, error_unit
+    private :: error_unit
 
 contains
 
