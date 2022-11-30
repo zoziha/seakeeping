@@ -48,6 +48,7 @@ module seakeeping_logger
 !! indicates that at least one of the writes to `log_units` failed.
 
     use, intrinsic :: iso_fortran_env, only: stderr => error_unit, stdin => input_unit, stdout => output_unit
+    use, intrinsic :: iso_c_binding, only: newline => c_new_line
     use seakeeping_error, only: error_stop => panic
     use seakeeping_string, only: to_lower
     use seakeeping_time, only: time_stamp => now
@@ -566,7 +567,7 @@ contains
         character(len=:), allocatable, intent(out) :: buffer
 
         integer :: count, indent_len, index_, length, remain
-        integer, parameter :: new_len = len(new_line('a'))
+        integer, parameter :: new_len = len(newline)
 
         length = len_trim(string)
         allocate (character(2*length) :: buffer)
@@ -590,7 +591,7 @@ contains
 
             if (self%max_width == 0 .or. &
                 (length <= self%max_width .and. &
-                 index(string(1:length), new_line('a')) == 0)) then
+                 index(string(1:length), newline) == 0)) then
                 buffer(1:length) = string(1:length)
                 len_buffer = length
                 remain = 0
@@ -598,7 +599,7 @@ contains
             else
 
                 index_ = index(string(1:min(length, self%max_width)), &
-                               new_line('a'))
+                               newline)
                 if (index_ == 0) then
                     do index_ = self%max_width, 1, -1
                         if (string(index_:index_) == ' ') exit
@@ -636,7 +637,7 @@ contains
                     call move_alloc(dummy, buffer)
                 end if
                 buffer(len_buffer + 1:new_len_buffer) = &
-                    new_line('a')//string(count + 1:length)
+                    newline//string(count + 1:length)
                 len_buffer = new_len_buffer
                 count = length
                 remain = 0
@@ -644,7 +645,7 @@ contains
             else
 
                 index_ = count + index(string(count + 1:count + self%max_width), &
-                                       new_line('a'))
+                                       newline)
                 if (index_ == count) then
                     do index_ = count + self%max_width, count + 1, -1
                         if (string(index_:index_) == ' ') exit
@@ -660,7 +661,7 @@ contains
                         call move_alloc(dummy, buffer)
                     end if
                     buffer(len_buffer + 1:new_len_buffer) = &
-                        new_line('a')//string(count + 1:count + self%max_width)
+                        newline//string(count + 1:count + self%max_width)
                     len_buffer = new_len_buffer
                     count = count + self%max_width
                     remain = length - count
@@ -674,7 +675,7 @@ contains
                         call move_alloc(dummy, buffer)
                     end if
                     buffer(len_buffer + 1:new_len_buffer) = &
-                        new_line('a')//string(count + 1:index_ - 1)
+                        newline//string(count + 1:index_ - 1)
                     len_buffer = new_len_buffer
                     count = index_
                     remain = length - count
@@ -689,7 +690,7 @@ contains
             integer :: new_len_buffer
             character(:), allocatable :: dummy
 
-            if (index(string(count + 1:length), new_line('a')) == 0 .and. &
+            if (index(string(count + 1:length), newline) == 0 .and. &
                 remain <= self%max_width - indent_len) then
                 new_len_buffer = len_buffer + length &
                                  - count + new_len + indent_len
@@ -699,7 +700,7 @@ contains
                     call move_alloc(dummy, buffer)
                 end if
                 buffer(len_buffer + 1:new_len_buffer) = &
-                    new_line('a')//col_indent//string(count + 1:length)
+                    newline//col_indent//string(count + 1:length)
                 len_buffer = new_len_buffer
                 count = length
                 remain = 0
@@ -708,7 +709,7 @@ contains
 
                 index_ = count + index(string(count + 1: &
                                               min(length, count + self%max_width - indent_len)), &
-                                       new_line('a'))
+                                       newline)
                 if (index_ == count) then
                     do index_ = count + self%max_width - indent_len, count + 1, -1
                         if (string(index_:index_) == ' ') exit
@@ -724,7 +725,7 @@ contains
                         call move_alloc(dummy, buffer)
                     end if
                     buffer(len_buffer + 1:new_len_buffer) = &
-                        new_line('a')//col_indent// &
+                        newline//col_indent// &
                         string(count + 1:count + self%max_width - indent_len)
                     len_buffer = new_len_buffer
                     count = count + self%max_width - indent_len
@@ -739,7 +740,7 @@ contains
                         call move_alloc(dummy, buffer)
                     end if
                     buffer(len_buffer + 1:new_len_buffer) = &
-                        new_line('a')//col_indent//string(count + 1:index_ - 1)
+                        newline//col_indent//string(count + 1:index_ - 1)
                     len_buffer = new_len_buffer
                     count = index_
                     remain = length - count
@@ -917,7 +918,7 @@ contains
 
         if (present(stat)) then
             write (dummy, '(a, i0)', err=999, iostat=iostat, iomsg=iomsg) &
-                new_line('a')//"With stat = ", stat
+                newline//"With stat = ", stat
         else
             dummy = ' '
         end if
@@ -925,7 +926,7 @@ contains
         if (present(errmsg)) then
             if (len_trim(errmsg) > 0) then
                 suffix = trim(dummy)// &
-                         new_line('a')//'With errmsg = "'//trim(errmsg)//'"'
+                         newline//'With errmsg = "'//trim(errmsg)//'"'
             else
                 suffix = dummy
             end if
@@ -1061,7 +1062,7 @@ contains
 
         if (present(iostat)) then
             write (dummy, '(a, i0)', err=999, iostat=iostat2, iomsg=iomsg2) &
-                new_line('a')//"With iostat = ", iostat
+                newline//"With iostat = ", iostat
         else
             dummy = ' '
         end if
@@ -1069,7 +1070,7 @@ contains
         if (present(iomsg)) then
             if (len_trim(iomsg) > 0) then
                 suffix = trim(dummy)// &
-                         new_line('a')//'With iomsg = "'//trim(iomsg)//'"'
+                         newline//'With iomsg = "'//trim(iomsg)//'"'
             else
                 suffix = trim(dummy)
             end if
@@ -1182,7 +1183,7 @@ contains
             if (self%add_blank_line) then
                 write (stdout, '(a)', err=999, iostat=iostat, &
                        iomsg=iomsg) &
-                    new_line('a')//buffer(1:len_buffer)
+                    newline//buffer(1:len_buffer)
             else
                 write (stdout, '(a)', err=999, iostat=iostat, &
                        iomsg=iomsg) &
@@ -1192,7 +1193,7 @@ contains
             if (self%add_blank_line) then
                 do unit = 1, self%units
                     write (self%log_units(unit), '(a)', err=999, iostat=iostat, &
-                           iomsg=iomsg) new_line('a')// &
+                           iomsg=iomsg) newline// &
                         buffer(1:len_buffer)
                 end do
             else
@@ -1350,29 +1351,29 @@ contains
             marker(column:column) = acaret
             if (self%add_blank_line) then
                 if (self%time_stamp) then
-                    buffer = new_line('a')//time_stamp()// &
-                             new_line('a')//trim(location)// &
-                             new_line('a')//new_line('a')//trim(line)// &
-                             new_line('a')//marker// &
-                             new_line('a')//'Error: '//trim(summary)
+                    buffer = newline//time_stamp()// &
+                             newline//trim(location)// &
+                             newline//newline//trim(line)// &
+                             newline//marker// &
+                             newline//'Error: '//trim(summary)
                 else
-                    buffer = new_line('a')//trim(location)// &
-                             new_line('a')//new_line('a')//trim(line)// &
-                             new_line('a')//marker// &
-                             new_line('a')//'Error: '//trim(summary)
+                    buffer = newline//trim(location)// &
+                             newline//newline//trim(line)// &
+                             newline//marker// &
+                             newline//'Error: '//trim(summary)
                 end if
             else
                 if (self%time_stamp) then
                     buffer = time_stamp()// &
-                             new_line('a')//trim(location)// &
-                             new_line('a')//new_line('a')//trim(line)// &
-                             new_line('a')//marker// &
-                             new_line('a')//'Error: '//trim(summary)
+                             newline//trim(location)// &
+                             newline//newline//trim(line)// &
+                             newline//marker// &
+                             newline//'Error: '//trim(summary)
                 else
                     buffer = trim(location)// &
-                             new_line('a')//new_line('a')//trim(line)// &
-                             new_line('a')//marker// &
-                             new_line('a')//'Error: '//trim(summary)
+                             newline//newline//trim(line)// &
+                             newline//marker// &
+                             newline//'Error: '//trim(summary)
                 end if
             end if
 
