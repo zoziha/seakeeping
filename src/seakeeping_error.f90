@@ -1,3 +1,4 @@
+! This file is part of Seakeeping. SPDX-Identifier: BSD 3-Clause License.
 !> 耐波性典型错误处理
 module seakeeping_error
 
@@ -24,6 +25,16 @@ contains
         allocate (error, source='"'//file//'" read error: '//message)
 
     end subroutine file_read_error
+
+    !> 文件写入错误
+    pure subroutine file_write_error(error, file, message)
+        character(:), allocatable, intent(out) :: error !! 错误信息
+        character(*), intent(in) :: file                !! 文件名
+        character(*), intent(in) :: message             !! 错误信息
+
+        allocate (error, source='"'//file//'" write error: '//message)
+
+    end subroutine file_write_error
 
     !> 常规错误
     pure subroutine general_error(error, message)
