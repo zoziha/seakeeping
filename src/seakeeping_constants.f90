@@ -24,6 +24,7 @@ module seakeeping_constants
     character(*), parameter :: fmt(*) = &
                                &[character(21) :: &
                                 '(a, *(g0.4, :, ", "))', &
-                                '(*(g0.4, :, ", "))']
+                                '(*(g0.4, :, ", "))', &
+                                '(*(a, g0.4, :, ", "))']
 
 end module seakeeping_constants
