@@ -18,9 +18,18 @@ module seakeeping_constants
                                                                 !! 空气密度
     real(rk), parameter :: p_atm = 101325.0_rk                  !! Atmospheric pressure <br>
                                                                 !! 大气压力
-    real(rk), parameter :: sqrt_eps = sqrt(epsilon(1.0_rk))     !! sqrt(epsilon) <br>
-                                                                !! 小量，平方根精度
+    !> 机器数值常量
+    !> 1. sqrt(epsilon)
+    !> 2. 1/3
+    !> 3. 2/3
+    real(rk), parameter :: const(3) = [sqrt(epsilon(1.0_rk)), &
+                                       1.0_rk/3.0_rk, &
+                                       2.0_rk/3.0_rk]
+
     !> 输出格式
+    !> 1. 字符+N数值
+    !> 2. N数值
+    !> 3. N(字符+数值)
     character(*), parameter :: fmt(*) = &
                                &[character(21) :: &
                                 '(a, *(g0.4, :, ", "))', &
