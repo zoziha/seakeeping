@@ -133,9 +133,9 @@ contains
 
         call get_environment_variable(key, value, status=stat)
         if (stat == 0) then
-            optenv = default
-        else
             optenv = trim(value)
+        else
+            optenv = default
         end if
 
     end function optenv
