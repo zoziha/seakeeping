@@ -22,7 +22,7 @@ module seakeeping_constants
     !> 1. sqrt(epsilon)
     !> 2. 1/3
     !> 3. 2/3
-    real(rk), parameter :: const(3) = [sqrt(epsilon(1.0_rk)), &
+    real(rk), parameter :: const(*) = [sqrt(epsilon(1.0_rk)), &
                                        1.0_rk/3.0_rk, &
                                        2.0_rk/3.0_rk]
 
