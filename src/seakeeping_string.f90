@@ -1,3 +1,4 @@
+! This file is part of Seakeeping. SPDX-Identifier: BSD 3-Clause License.
 !> author: 左志华
 !> date: 2022-09-17
 !>
@@ -5,9 +6,13 @@
 !> 耐波心性字符串
 module seakeeping_string
 
-    use, intrinsic :: iso_c_binding, only: newline => c_new_line
     use seakeeping_kinds, only: rk
     private :: rk
+
+    !> 字符串派生类型
+    type string_t
+        character(:), allocatable :: raw  !! 内置字符串
+    end type string_t
 
 contains
 

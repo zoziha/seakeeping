@@ -7,8 +7,8 @@ module seakeeping_math
 
     use, intrinsic :: ieee_arithmetic, only: ieee_is_nan
     use seakeeping_kinds, only: rk
-    use seakeeping_constants, only: g, Pi, sqrt_eps
-    private :: ieee_is_nan, rk, g, Pi, sqrt_eps
+    use seakeeping_constants, only: g, Pi, const
+    private :: ieee_is_nan, rk, g, Pi, const
 
     interface arange
         procedure :: arange_ik, arange_rk
@@ -172,7 +172,7 @@ contains
             if (present(rel_tol)) then
                 rel_tol_ = rel_tol
             else
-                rel_tol_ = sqrt_eps
+                rel_tol_ = const(1)
             end if
 
             if (present(abs_tol)) then

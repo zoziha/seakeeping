@@ -1,3 +1,4 @@
+! This file is part of Seakeeping. SPDX-Identifier: BSD 3-Clause License.
 !> author: 左志华
 !> date: 2022-09-16
 !>
@@ -17,8 +18,22 @@ module seakeeping_constants
                                                                 !! 空气密度
     real(rk), parameter :: p_atm = 101325.0_rk                  !! Atmospheric pressure <br>
                                                                 !! 大气压力
-    real(rk), parameter :: sqrt_eps = sqrt(epsilon(1.0_rk))     !! sqrt(epsilon) <br>
-                                                                !! 小量，平方根精度
-    character(*), parameter :: fmt = '(a, *(g0.4, :, ", "))'    !! 输出格式
+    !> 机器数值常量
+    !> 1. sqrt(epsilon)
+    !> 2. 1/3
+    !> 3. 2/3
+    real(rk), parameter :: const(*) = [sqrt(epsilon(1.0_rk)), &
+                                       1.0_rk/3.0_rk, &
+                                       2.0_rk/3.0_rk]
+
+    !> 输出格式
+    !> 1. 字符+N数值
+    !> 2. N数值
+    !> 3. N(字符+数值)
+    character(*), parameter :: fmt(*) = &
+                               &[character(21) :: &
+                                '(a, *(g0.4, :, ", "))', &
+                                '(*(g0.4, :, ", "))', &
+                                '(*(a, g0.4, :, ", "))']
 
 end module seakeeping_constants

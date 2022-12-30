@@ -6,7 +6,9 @@ program main
     integer :: seed
     call tic(seed)
     call toc(seed)
+    call sleep(2)
     call toc(seed)
+    call toc(seed, is_second=.true.)
     call toc(seed, 'test')
 
 end program main
