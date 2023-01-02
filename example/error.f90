@@ -10,6 +10,9 @@ program main
 
     call unexpected_error(error, 'dimension mismatch', '2', '3')
     call warning(error)
+    
+    call wrap_error(error, 'more message')
+    call warning(error)
 
     call check_file_exists('test.txt', error)
     if (allocated(error)) then
