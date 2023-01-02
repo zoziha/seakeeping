@@ -13,7 +13,7 @@ module seakeeping_kinds
 #elif REAL64
     integer, parameter :: rk = real64
 #else
-    integer, parameter :: rk = real32
+    integer, parameter :: rk = real64
 #endif
 
 end module seakeeping_kinds
