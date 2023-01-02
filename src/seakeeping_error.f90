@@ -45,6 +45,17 @@ contains
 
     end subroutine general_error
 
+    !> 意外错误
+    pure subroutine unexpected_error(error, message, expected, actual)
+        character(:), allocatable, intent(out) :: error !! 错误信息
+        character(*), intent(in) :: message             !! 错误信息
+        character(*), intent(in) :: expected, actual    !! 预期值和实际值
+
+        allocate (error, source='unexpected error: '//message// &
+                  ', expected "'//expected//'" but got "'//actual//'"')
+
+    end subroutine unexpected_error
+
     !> 警告
     subroutine warning(error)
         character(*), intent(in) :: error !! 警告信息

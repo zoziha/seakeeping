@@ -8,6 +8,9 @@ program main
         call warning(error)
     end if
 
+    call unexpected_error(error, 'dimension mismatch', '2', '3')
+    call warning(error)
+
     call check_file_exists('test.txt', error)
     if (allocated(error)) then
         call panic(error, 42)
