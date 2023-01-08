@@ -124,7 +124,7 @@ contains
 
     !> 查询 key 是否存在与环境变量，如果存在则返回其值，否则返回默认值。
     !> @note 可使用 len(optenv('key', '')) == 0 以判断 key 在环境变量中不存在
-    impure function optenv(key, default)
+    function optenv(key, default)
         character(*), intent(in) :: key       !! 名
         character(*), intent(in) :: default   !! 值
         character(:), allocatable :: optenv

@@ -13,7 +13,7 @@ contains
 
     !> Inquire whether a file/directory exists <br>
     !> 查询文件 / 文件夹路径是否存在
-    impure elemental logical function is_exist(file, dir)
+    logical function is_exist(file, dir)
         character(*), intent(in) :: file    !! file name <br>
                                             !! 文件 / 文件夹名称
         logical, intent(in), optional :: dir!! is directory ? <br>
@@ -32,7 +32,7 @@ contains
 
     !> Judge if the system is Windows operating system <br>
     !> 判断系统是否为 Windows 操作系统
-    impure logical function is_windows()
+    logical function is_windows()
         character(16) :: os_name
         logical, save :: is_windows_ = .false.
         logical, save :: is_first_run = .true.
@@ -50,7 +50,7 @@ contains
 
     !> Counts the line number of text file <br>
     !> 计算文本文件行数
-    impure integer function countlines(file)
+    integer function countlines(file)
         character(*), intent(in) :: file    !! file name <br>
                                             !! 文件名称
         integer :: istat, iunit
@@ -86,7 +86,7 @@ contains
 
     !> Merge the directory and file name into a complete path <br>
     !> 将路径中的目录和文件名合并成一个完整的路径
-    impure function join_path(dir, file) result(path)
+    function join_path(dir, file) result(path)
         character(*), intent(in) :: dir             !! Directory name <br>
                                                     !! 目录名
         character(*), intent(in) :: file            !! File name <br>
@@ -112,7 +112,7 @@ contains
 
     !> Make directory <br>
     !> 生成文件夹路径
-    impure elemental subroutine mkdir(path)
+    subroutine mkdir(path)
         character(*), intent(in) :: path    !! path name <br>
                                             !! 文件夹路径
         integer :: exitstat
@@ -126,7 +126,7 @@ contains
 
     !> Remove directory <br>
     !> 删除文件夹路径
-    impure elemental subroutine rmdir(path)
+    subroutine rmdir(path)
         character(*), intent(in) :: path    !! path name <br>
                                             !! 文件夹路径
         integer :: exitstat

@@ -34,7 +34,7 @@ module seakeeping_linalg
 contains
 
     !> calculate inverse of a double precision matrix
-    impure function rinv(a) result(b)
+    function rinv(a) result(b)
         real(rk), intent(in) :: a(:, :)
         real(rk) :: b(size(a, 2), size(a, 1))
         integer :: ipiv(size(a, 1)), info
@@ -50,7 +50,7 @@ contains
     end function rinv
 
     !> calculate inverse of a double precision matrix
-    impure function cinv(a) result(b)
+    function cinv(a) result(b)
         complex(rk), intent(in) :: a(:, :)
         complex(rk) :: b(size(a, 2), size(a, 1))
         integer :: ipiv(size(a, 1)), info
@@ -66,7 +66,7 @@ contains
     end function cinv
 
     !> solve linear system of double precision
-    impure function rsolve(a, b) result(x)
+    function rsolve(a, b) result(x)
         real(rk), intent(in) :: a(:, :), b(:, :)
         real(rk) :: x(size(b, 1), size(b, 2))
 
@@ -81,7 +81,7 @@ contains
     end function rsolve
 
     !> solve linear system of double precision
-    impure function csolve(a, b) result(x)
+    function csolve(a, b) result(x)
         complex(rk), intent(in) :: a(:, :), b(:, :)
         complex(rk) :: x(size(b, 1), size(b, 2))
 
@@ -96,7 +96,7 @@ contains
     end function csolve
 
     !> calculate determinant of a double precision matrix
-    impure function det(a) result(d)
+    function det(a) result(d)
         real(rk), intent(in) :: a(:, :)
         real(rk) :: d
         real(rk) :: a_(size(a, 1), size(a, 2))
@@ -118,7 +118,7 @@ contains
     end function det
 
     !> matrix multiplication of double precision matrices
-    impure function rgemm(a, b) result(c)
+    function rgemm(a, b) result(c)
         real(rk), intent(in) :: a(:, :), b(:, :)
         real(rk) :: c(size(a, 1), size(b, 2))
         integer :: m, n, k
@@ -136,7 +136,7 @@ contains
     end function rgemm
 
     !> matrix multiplication of double precision complex matrices
-    impure function cgemmx(a, b) result(c)
+    function cgemmx(a, b) result(c)
         complex(rk), intent(in) :: a(:, :), b(:, :)
         complex(rk) c(size(a, 1), size(b, 2))
         integer m, n, k
