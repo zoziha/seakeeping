@@ -19,9 +19,10 @@ contains
 
     !> Stop timer and return the time <br>
     !> 停止计时器并返回时间（秒计时）
-    impure subroutine toc(seed, t)
+    impure subroutine toc(seed, t, is_second)
         integer, intent(in) :: seed
         class(*), optional :: t
+        logical, intent(in), optional :: is_second
         integer :: time_now, time_rate
 
         call system_clock(time_now, time_rate)
@@ -35,15 +36,41 @@ contains
                 type is (integer)
                     t = nint(dt)
                 type is (character(*))
-                    write (*, "(2a,g0.3,a)") t, ', time elapsed: ', dt, "s"
+                    if (present(is_second)) then
+                        if (is_second) then
+                            write (*, "(2a,g0.3,a)") t, ', time elapsed: ', dt, "s"
+                            return
+                        end if
+                    end if
+                    write (*, "(3a)") t, ', time elapsed: ', format_time(dt)
                 class default
                     write (*, '(a)') 'Error: unknown type of t in toc()'
                 end select
             else
-                write (*, "(a,g0.3,a)") 'Time elapsed: ', dt, " s"
+                if (present(is_second)) then
+                    if (is_second) then
+                        write (*, "(a,g0.3,a)") 'Time elapsed: ', dt, "s"
+                        return
+                    end if
+                end if
+                write (*, "(2a)") 'Time elapsed: ', format_time(dt)
             end if
 
         end associate
+
+    contains
+
+        !> Format time
+        pure function format_time(dt) result(ans)
+            real(rk), intent(in) :: dt  !! time in seconds
+            character(len=23) :: ans
+            integer :: hour, minute, second, millisecond
+            hour = int(dt/3600)
+            minute = int((dt - hour*3600)/60)
+            second = int(dt - hour*3600 - minute*60)
+            millisecond = nint((dt - hour*3600 - minute*60 - second)*1000)
+            write (ans, "(i3.3,':',i2.2,':',i2.2,'.',i3.3)") hour, minute, second, millisecond
+        end function format_time
 
     end subroutine toc
 

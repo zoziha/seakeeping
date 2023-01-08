@@ -3,6 +3,7 @@
 module seakeeping_error
 
     use, intrinsic :: iso_fortran_env, only: error_unit
+    use, intrinsic :: iso_c_binding, only: c_new_line
     private :: error_unit
 
 contains
@@ -44,6 +45,26 @@ contains
         allocate (error, source=message)
 
     end subroutine general_error
+
+    !> 意外错误
+    pure subroutine unexpected_error(error, message, expected, actual)
+        character(:), allocatable, intent(out) :: error !! 错误信息
+        character(*), intent(in) :: message             !! 错误信息
+        character(*), intent(in) :: expected, actual    !! 预期值和实际值
+
+        allocate (error, source='unexpected error: '//message// &
+                  ', expected "'//expected//'" but got "'//actual//'"')
+
+    end subroutine unexpected_error
+
+    !> 包装错误
+    pure subroutine wrap_error(error, message)
+        character(:), allocatable, intent(inout) :: error  !! 错误信息
+        character(*), intent(in) :: message  !! 更多错误信息
+
+        error = error//c_new_line//"<MORE>  "//message
+
+    end subroutine wrap_error
 
     !> 警告
     subroutine warning(error)
