@@ -1,12 +1,12 @@
-#ifdef REAL64
-#define sgesv dgesv
-#define sgetrf dgetrf
-#define sgetri dgetri
-#define sgemm dgemm
-#define cgesv zgesv
-#define cgetrf zgetrf
-#define cgetri zgetri
-#define cgemm zgemm
+#ifdef REAL32
+#define dgesv sgesv
+#define dgetrf sgetrf
+#define dgetri sgetri
+#define dgemm sgemm
+#define zgesv cgesv
+#define zgetrf cgetrf
+#define zgetri cgetri
+#define zgemm cgemm
 #endif
 !> author: 左志华
 !> date: 2022-11-12
@@ -42,10 +42,10 @@ contains
 
         b = a
         ! http://www.netlib.org/lapack/explore-html/d8/ddc/group__real_g_ecomputational_ga8d99c11b94db3d5eac75cac46a0f2e17.html
-        call sgetrf(size(a, 1), size(a, 2), b, size(a, 1), ipiv, info)
+        call dgetrf(size(a, 1), size(a, 2), b, size(a, 1), ipiv, info)
 
         ! http://www.netlib.org/lapack/explore-html/d8/ddc/group__real_g_ecomputational_ga1af62182327d0be67b1717db399d7d83.html
-        call sgetri(size(a, 2), b, size(a, 1), ipiv, work, size(a, 2), info)
+        call dgetri(size(a, 2), b, size(a, 1), ipiv, work, size(a, 2), info)
 
     end function rinv
 
@@ -58,10 +58,10 @@ contains
 
         b = a
         ! http://www.netlib.org/lapack/explore-html/d8/ddc/group__real_g_ecomputational_ga8d99c11b94db3d5eac75cac46a0f2e17.html
-        call cgetrf(size(a, 1), size(a, 2), b, size(a, 1), ipiv, info)
+        call zgetrf(size(a, 1), size(a, 2), b, size(a, 1), ipiv, info)
 
         ! http://www.netlib.org/lapack/explore-html/d8/ddc/group__real_g_ecomputational_ga1af62182327d0be67b1717db399d7d83.html
-        call cgetri(size(a, 2), b, size(a, 1), ipiv, work, size(a, 2), info)
+        call zgetri(size(a, 2), b, size(a, 1), ipiv, work, size(a, 2), info)
 
     end function cinv
 
@@ -76,7 +76,7 @@ contains
 
         a_ = a; x = b
         ! http://www.netlib.org/lapack/explore-html/d0/db8/group__real_g_esolve_ga3b05fb3999b3d7351cb3101a1fd28e78.html
-        call sgesv(size(a, 1), size(b, 2), a_, size(a, 1), ipiv, x, size(b, 1), info)
+        call dgesv(size(a, 1), size(b, 2), a_, size(a, 1), ipiv, x, size(b, 1), info)
 
     end function rsolve
 
@@ -91,7 +91,7 @@ contains
 
         a_ = a; x = b
         ! http://www.netlib.org/lapack/explore-html/d0/db8/group__real_g_esolve_ga3b05fb3999b3d7351cb3101a1fd28e78.html
-        call cgesv(size(a, 1), size(b, 2), a_, size(a, 1), ipiv, x, size(b, 1), info)
+        call zgesv(size(a, 1), size(b, 2), a_, size(a, 1), ipiv, x, size(b, 1), info)
 
     end function csolve
 
@@ -104,7 +104,7 @@ contains
 
         a_ = a
         ! http://www.netlib.org/lapack/explore-html/d8/ddc/group__real_g_ecomputational_ga8d99c11b94db3d5eac75cac46a0f2e17.html
-        call sgetrf(size(a, 1), size(a, 2), a_, size(a, 1), ipiv, info)
+        call dgetrf(size(a, 1), size(a, 2), a_, size(a, 1), ipiv, info)
 
         d = 1.0_rk
         do i = 1, size(a, 2)
@@ -127,7 +127,7 @@ contains
         n = size(b, 2)
         k = size(a, 2)
         ! http://www.netlib.org/lapack/explore-html/d1/d54/group__double__blas__level3_gaeda3cbd99c8fb834a60a6412878226e1.html
-        call sgemm( &
+        call dgemm( &
             'N', 'N', &
             m, n, k, &
             1.0_rk, a, m, b, k, &
@@ -145,7 +145,7 @@ contains
         n = size(b, 2)
         k = size(a, 2)
         ! http://www.netlib.org/lapack/explore-html/d1/d54/group__double__blas__level3_gaeda3cbd99c8fb834a60a6412878226e1.html
-        call cgemm( &
+        call zgemm( &
             'N', 'N', &
             m, n, k, &
             (1.0_rk, 0.0_rk), a, m, b, k, &
