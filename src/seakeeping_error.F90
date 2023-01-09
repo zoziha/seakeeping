@@ -80,11 +80,15 @@ contains
         integer, intent(in), optional :: code   !! 恐慌代码
 
         write (error_unit, '(2a)') '<ERROR> ', error
+#ifdef F2008
+        stop 1
+#else
         if (present(code)) then
             stop code
         else
             stop 1
         end if
+#endif
 
     end subroutine panic
 

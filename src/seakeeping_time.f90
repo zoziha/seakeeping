@@ -12,14 +12,14 @@ contains
 
     !> Start timer <br>
     !> 启动计时器
-    impure subroutine tic(seed)
+    subroutine tic(seed)
         integer, intent(out) :: seed
         call system_clock(seed)
     end subroutine tic
 
     !> Stop timer and return the time <br>
     !> 停止计时器并返回时间（秒计时）
-    impure subroutine toc(seed, t, is_second)
+    subroutine toc(seed, t, is_second)
         integer, intent(in) :: seed
         class(*), optional :: t
         logical, intent(in), optional :: is_second
@@ -76,7 +76,7 @@ contains
 
     !> Get current time <br>
     !> 获得当前日期或时间
-    impure character(23) function now() result(t)
+    character(23) function now() result(t)
         character(len=8) :: datstr
         character(len=10) :: timstr
 
