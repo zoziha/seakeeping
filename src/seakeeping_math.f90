@@ -35,7 +35,7 @@ contains
     end function cross_product
 
     !> Argument of a complex number <br>
-    !> 复数的辐角
+    !> 复数的辐角, \( \theta = atan2(y, x) \)
     !> @note cmplx%re 需要 gfortran 9 以上支持
     elemental real(rk) function arg(z)
         complex(rk), intent(in) :: z
