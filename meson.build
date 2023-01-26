@@ -29,12 +29,19 @@ src = files(
     'src/seakeeping_wave.f90',
 )
 
-lib = library(
-    'seakeeping',
+seakeeping_lib = library(
+    meson.project_name(),
     src,
     dependencies : [
         dependency('openblas'),
         dependency('openmp'),
     ],
     install : true,
+)
+
+seakeeping_inc = seakeeping_lib.private_dir_include()
+
+seakeeping_dep = declare_dependency(
+    link_with : seakeeping_lib,
+    include_directories : seakeeping_inc,
 )
