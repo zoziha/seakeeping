@@ -1,8 +1,8 @@
 # 船舶耐波性包
 
-[![seakeeping](https://img.shields.io/badge/Seakeeping-v1.5.0-blueviolet)][1]
-[![license](https://img.shields.io/badge/License-BSD--3-important)](LICENSE)
-[![fpm](https://img.shields.io/badge/Fortran--lang/fpm-^0.6.0-blue)][2]
+[![Seakeeping](https://img.shields.io/badge/Seakeeping-v1.5.0-blueviolet)][1]
+[![License](https://img.shields.io/badge/License-BSD--3-important)](LICENSE)
+[![Builder](https://img.shields.io/badge/Builder-fpm^0.6.0_|_meson-blue)][2]
 [![Compiler](https://img.shields.io/badge/Compiler-GFortran^10.3.0-brightgreen)][3]
 [![Fortran](https://img.shields.io/badge/Fortran-^2018-purple)](https://fortran-lang.org/)
 
