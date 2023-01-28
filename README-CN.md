@@ -58,6 +58,21 @@ macros = ['REAL32']
 
 对应：`--flag "-cpp DREAL32"`。
 
+## 使用 Meson 编译
+
+本包也支持使用 `meson` 构建，可以使用 `meson` 的 `subproject` 功能，将 `seakeeping` 作为子项目引入。
+
+```sh
+>> meson setup build  # 配置 meson 构建目录
+>> meson compile -C build  # 编译
+```
+
+在 `meson.build` 中，可以使用 `subproject` 函数引入 `seakeeping`：
+
+```sh
+seakeeping_dep = subproject('seakeeping').get_variable('seakeeping_dep')
+>> meson subprojects download  # 下载子项目
+```
 
 ## 其他包
 
