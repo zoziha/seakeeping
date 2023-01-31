@@ -4,7 +4,8 @@
 !> Seakeeping wave theory <br>
 !> 耐波性波浪理论
 !>### 参考
-!> 1. 船舶原理（上）
+!> 1. 船舶原理（上）<br>
+!> 2. 如何让水中涟漪变成拍岸巨浪？水面波的形成原因和增强原理.
 module seakeeping_wave
 
     use seakeeping_kinds, only: rk
@@ -93,5 +94,15 @@ contains
         zeta = sin(k*x*cos(beta) + k*y*sin(beta) + w*t)
 
     end function zeta
+
+    !> 深水波波速 \( v = \sqrt{\frac{g\lambda}{2\pi}} \)
+    !>@note 确保水深大于半波长，造波机多次前后移动制造深水波，波长越大的后波将追赶前波，
+    !> 最终水面波可叠加形成一条大浪
+    real(rk) pure function vdeep(lambda)
+        real(rk), intent(in) :: lambda
+
+        vdeep = sqrt(g*lambda/(2*Pi))
+
+    end function vdeep
 
 end module seakeeping_wave

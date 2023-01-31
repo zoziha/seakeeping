@@ -1,7 +1,7 @@
 !> author: 左志华
 !> date: 2022-09-16
 !>
-!> Seakeeping time series analysis
+!> Seakeeping time series analysis <br>
 !> 耐波性时间序列分析
 !> @note fft 存在许可证（LGPL）风险（即使 fft 存在风险，我希望本包其他例程不服从 LGPL 协议），
 !> 借鉴了 https://people.math.sc.edu/Burkardt/f_src/fft_openmp/fft_openmp.html
