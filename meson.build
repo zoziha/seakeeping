@@ -32,6 +32,7 @@ src = files(
 seakeeping_lib = library(
     meson.project_name(),
     src,
+    version : meson.project_version(),
     dependencies : [
         dependency('openblas'),
         dependency('openmp'),
