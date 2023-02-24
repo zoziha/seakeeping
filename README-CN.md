@@ -4,7 +4,7 @@
 [![License](https://img.shields.io/badge/License-BSD--3-important)](LICENSE)
 [![Builder](https://img.shields.io/badge/Builder-fpm^0.6.0_|_meson-blue)][2]
 [![Compiler](https://img.shields.io/badge/Compiler-GFortran^10.3.0-brightgreen)][3]
-[![Fortran](https://img.shields.io/badge/Fortran-^2018-purple)](https://fortran-lang.org/)
+[![Fortran](https://img.shields.io/badge/Fortran-^2008-purple)](https://fortran-lang.org/)
 
 [1]: https://gitee.com/ship-motions/seakeeping
 [2]: https://github.com/fortran-lang/fpm

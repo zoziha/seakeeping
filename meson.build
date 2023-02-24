@@ -7,6 +7,7 @@ project(
     license : 'BSD-3-Clause',
     default_options : [
         'buildtype=debugoptimized',
+        'fortran_std=f2008'
     ],
 )
 
@@ -40,7 +41,6 @@ seakeeping_lib = library(
 )
 
 seakeeping_inc = seakeeping_lib.private_dir_include()
-
 seakeeping_dep = declare_dependency(
     link_with : seakeeping_lib,
     include_directories : seakeeping_inc,

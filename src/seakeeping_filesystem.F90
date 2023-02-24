@@ -115,11 +115,10 @@ contains
     subroutine mkdir(path)
         character(*), intent(in) :: path    !! path name <br>
                                             !! 文件夹路径
-        integer :: exitstat
         if (is_windows()) then
-            call execute_command_line("md "//windows_path(path), exitstat=exitstat)
+            call execute_command_line("md "//windows_path(path))
         else
-            call execute_command_line("mkdir -p "//path, exitstat=exitstat)
+            call execute_command_line("mkdir -p "//path)
         end if
 
     end subroutine mkdir
@@ -129,11 +128,10 @@ contains
     subroutine rmdir(path)
         character(*), intent(in) :: path    !! path name <br>
                                             !! 文件夹路径
-        integer :: exitstat
         if (is_windows()) then
-            call execute_command_line("rd /s /q "//windows_path(path), exitstat=exitstat)
+            call execute_command_line("rd /s /q "//windows_path(path))
         else
-            call execute_command_line("rm -rf "//path, exitstat=exitstat)
+            call execute_command_line("rm -rf "//path)
         end if
 
     end subroutine rmdir

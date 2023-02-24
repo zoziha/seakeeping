@@ -9,6 +9,7 @@ description = "Seakeeping Routines for Naval Architecture and Ocean Engineering"
 [build]
 auto-tests = true
 auto-examples = true
+link = 'openblas'
 
 [install]
 library = true
