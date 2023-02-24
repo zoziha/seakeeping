@@ -3,7 +3,7 @@
 project(
     'seakeeping',
     'fortran',
-    version : '1.5.0',
+    version : '1.6.0',
     license : 'BSD-3-Clause',
     default_options : [
         'buildtype=debugoptimized',
