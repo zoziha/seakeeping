@@ -13,7 +13,6 @@ project(
 src = files(
     'src/seakeeping_array.f90',
     'src/seakeeping_constants.f90',
-    'src/seakeeping_error.F90',
     'src/seakeeping_filesystem.F90',
     'src/seakeeping_geometry.f90',
     'src/seakeeping_kinds.F90',
