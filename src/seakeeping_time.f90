@@ -6,28 +6,35 @@
 module seakeeping_time
 
     use seakeeping_kinds, only: rk
-    private :: rk
+    private
+
+    !> 计时器
+    type, public :: timer
+        integer, private :: seed
+    contains
+        procedure :: tic, toc, nowtime
+    end type timer
 
 contains
 
     !> Start timer <br>
     !> 启动计时器
-    subroutine tic(seed)
-        integer, intent(out) :: seed
-        call system_clock(seed)
+    subroutine tic(self)
+        class(timer), intent(inout) :: self
+        call system_clock(self%seed)
     end subroutine tic
 
     !> Stop timer and return the time <br>
     !> 停止计时器并返回时间（秒计时）
-    subroutine toc(seed, t, is_second)
-        integer, intent(in) :: seed
+    subroutine toc(self, t, is_second)
+        class(timer), intent(in) :: self
         class(*), optional :: t
         logical, intent(in), optional :: is_second
         integer :: time_now, time_rate
 
         call system_clock(time_now, time_rate)
 
-        associate (dt => real(time_now - seed, rk)/time_rate)
+        associate (dt => real(time_now - self%seed, rk)/time_rate)
 
             if (present(t)) then
                 select type (t)
@@ -76,7 +83,8 @@ contains
 
     !> Get current time <br>
     !> 获得当前日期或时间
-    character(23) function now() result(t)
+    character(23) function nowtime(self) result(t)
+        class(timer), intent(in) :: self
         character(len=8) :: datstr
         character(len=10) :: timstr
 
@@ -89,6 +97,6 @@ contains
             timstr(3:4)//":"// &
             timstr(5:10)
 
-    end function now
+    end function nowtime
 
 end module seakeeping_time

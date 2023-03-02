@@ -1,16 +1,10 @@
 program main
-
-    use seakeeping_kinds, only: rk
-    use seakeeping_time, only: tic, toc
+    use seakeeping_time, only: timer
     implicit none
-    integer :: seed
-    call tic(seed)
-    call toc(seed)
-#ifndef F2008
-    call sleep(2)
-#endif
-    call toc(seed)
-    call toc(seed, is_second=.true.)
-    call toc(seed, 'test')
-
+    type(timer) :: time
+    call time%tic
+    print '(a)', time%nowtime()
+    call time%toc
+    call time%toc(is_second=.true.)
+    call time%toc('test')
 end program main
