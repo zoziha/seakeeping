@@ -6,9 +6,8 @@
 !> 耐波性几何学
 module seakeeping_geometry
 
-    use seakeeping_kinds, only: rk
+    use seakeeping_kinds
     use seakeeping_math, only: heron_formula
-    private :: rk, heron_formula
 
     interface centroid
         procedure :: centroid3l, centroid4l
@@ -25,8 +24,8 @@ contains
     !> Centroid of a triangle <br>
     !> 三角形形心
     pure function centroid3l(a, b, c) result(cen)
-        real(rk), intent(in) :: a(3), b(3), c(3)
-        real(rk) :: cen(3)
+        real(sk_real_kind), intent(in) :: a(3), b(3), c(3)
+        real(sk_real_kind) :: cen(3)
 
         cen(:) = (a(:) + b(:) + c(:))/3
 
@@ -35,8 +34,8 @@ contains
     !> Centroid of a quadrilateral <br>
     !> 四边形形心
     pure function centroid4l(a, b, c, d) result(cen)
-        real(rk), intent(in) :: a(3), b(3), c(3), d(3)
-        real(rk) :: cen(3)
+        real(sk_real_kind), intent(in) :: a(3), b(3), c(3), d(3)
+        real(sk_real_kind) :: cen(3)
 
         cen = area3l(a, b, c)*centroid3l(a, b, c) + area3l(a, c, d)*centroid3l(a, c, d)
 
@@ -45,8 +44,8 @@ contains
     !> Area of a triangle <br>
     !> 三角形面积
     pure function area3l(a, b, c) result(area)
-        real(rk), intent(in) :: a(3), b(3), c(3)
-        real(rk) :: area
+        real(sk_real_kind), intent(in) :: a(3), b(3), c(3)
+        real(sk_real_kind) :: area
 
         associate (d1 => distance(a - b), &
                    d2 => distance(b - c), &
@@ -59,8 +58,8 @@ contains
     !> Area of a quadrilateral <br>
     !> 四边形面积
     pure function area4l(a, b, c, d) result(area)
-        real(rk), intent(in) :: a(3), b(3), c(3), d(3)
-        real(rk) :: area
+        real(sk_real_kind), intent(in) :: a(3), b(3), c(3), d(3)
+        real(sk_real_kind) :: area
 
         associate (d1 => distance(a - b), &
                    d2 => distance(b - c), &
@@ -75,8 +74,8 @@ contains
     !> Distance between two points <br>
     !> 两点间距离, \( d = |\overrightarrow{ab} | \)
     pure function distance(a) result(dis)
-        real(rk), intent(in) :: a(3)
-        real(rk) :: dis
+        real(sk_real_kind), intent(in) :: a(3)
+        real(sk_real_kind) :: dis
 
         dis = sqrt(a(1)*a(1) + a(2)*a(2) + a(3)*a(3))
 
@@ -85,8 +84,8 @@ contains
     !> Unitize a vector <br>
     !> 单位化向量
     pure function unitize(x) result(y)
-        real(rk), intent(in), dimension(3) :: x
-        real(rk), dimension(3) :: y
+        real(sk_real_kind), intent(in), dimension(3) :: x
+        real(sk_real_kind), dimension(3) :: y
 
         y = x/distance(x)
 

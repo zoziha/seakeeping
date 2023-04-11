@@ -1,82 +1,93 @@
-# Seakeeping Package
+# 船舶耐波性包
 
-[![seakeeping](https://img.shields.io/badge/Seakeeping-v1.6.0-blueviolet)][1]
-[![license](https://img.shields.io/badge/License-BSD--3-important)](LICENSE)
-[![fpm](https://img.shields.io/badge/Fortran--lang/fpm-^0.6.0-blue)][2]
+[![Seakeeping](https://img.shields.io/badge/Seakeeping-v1.6.0-blueviolet)][1]
+[![License](https://img.shields.io/badge/License-BSD--3-important)](LICENSE)
+[![Builder](https://img.shields.io/badge/Builder-fpm^0.6.0_|_meson-blue)][2]
 [![Compiler](https://img.shields.io/badge/Compiler-GFortran^10.3.0-brightgreen)][3]
 [![Fortran](https://img.shields.io/badge/Fortran-^2008-purple)](https://fortran-lang.org/)
 
-[1]: https://github.com/zoziha/seakeeping
+[1]: https://gitee.com/ship-motions/seakeeping
 [2]: https://github.com/fortran-lang/fpm
 [3]: https://fortran-lang.org/compilers
 
-Based on programming experience, writing more detailed and expressive code for a specific field helps
-to improve the readability, maintainability, and descriptiveness of the code from the bottom.
+基于编程经验，对特定领域编写更详实的表达型代码，有助于从底层提高代码的可读性、可维护性、可描述性。
 
-Therefore, this package is formed to express and calculate the seakeeping problem of ships.
-Facts have proved that this package has indeed improved my coding efficiency and code reuse
+于是，形成了这个包，用于表达、计算船舶耐波性问题。事实证明，本包的确提高了我的编码效率与代码复用。
 
-Note: Based on the module shake-off feature of the `fpm` program, modules that are not `use` will not participate in the source code compilation, which can relatively improve the compilation efficiency.
+备注：基于 `fpm` 程序的模块抖落特性，没有被 `use` 的模块将不参与源码编译，可以相对提高编译效率。
 
-## Selective compilation
+## 选择性编译
 
-`fpm` supports tree shattering feature, which can be controlled by the `-no-prune` option,
-which is enabled by default. Meanwhile, `fpm` supports preprocessors since `0.7.0`.
+`fpm` 支持树抖落特性，可以通过 `-no-prune` 选项控制，默认是开启的。同时，`fpm` 从 `0.7.0` 开始支持了预处理器。
 
-If you need to build this package completely as a link library `seakeeping`, you can use the following `flag`:
+若需要完整地单独构建本包为链接库 `seakeeping`，可以使用以下 `flag`：
 
-````sh
+```sh
 cd seakeeping
-fpm build --flag "-cpp"          # ifort replaces -cpp with -fpp
-fpm build --flag "-cpp -DREAL32" # Compile single precision link library
-````
+fpm build --flag "-cpp"           # ifort 将 -cpp 换成 -fpp
+fpm build --flag "-cpp -DREAL32"  # 编译单精度链接库
+```
 
-The `openblas` here can be changed to `lapack`, `blas` or others according to your own needs.
+此处的 `openblas` 根据自己的需求可以换成 `lapack`、`blas` 或其他。
 
-If you need to reference the `seakeeping` package in other `fpm` projects, you can enable the tree
-shaking command, declared in the `fpm.toml` of the top-level app project:
+若需要在其他 `fpm` 项目中引用 `seakeeping` 包，可以启用树抖落命令，在顶级 app 项目的 `fpm.toml` 中声明：
 
-**Enable openblas**
+**启用 openblas**
 
-````toml
+```toml
 [build]
-link = ['openblas'] # or link = ['blas', 'lapack']
-````
+link = ['openblas']  # 或者 link = ['blas', 'lapack']
+```
 
-**Enable preprocessor**
+**启用预处理器**
 
-````toml
+```toml
 [preprocess]
 [preprocess.cpp]
-````
+```
 
-Corresponds to: gfortran, `--flag "-cpp"`; ifort (Unix), `--flag "-fpp"`; ifort (Windows), `--flag "/fpp"`.
+对应：gfortran，`--flag "-cpp"`；ifort（Unix），`--flag "-fpp"`；ifort（Windows），`--flag "/fpp"`。
 
-**Use single precision**
+**使用单精度**
 
-````toml
+```toml
 [preprocess]
 [preprocess.cpp]
 macros = ['REAL32']
-````
+```
 
-Corresponds to: `--flag "-cpp DREAL32"`.
+对应：`--flag "-cpp DREAL32"`。
 
-## Other packages
+## 使用 Meson 编译
 
-Here are other packages that are suitable for marine seakeeping issues:
+本包也支持使用 `meson` 构建，可以使用 `meson` 的 `subproject` 功能，将 `seakeeping` 作为子项目引入。
 
-- minpack/nlopt-f: solve nonlinear equations;
-- fftw/fftpack: Fast Fourier Transform;
-- fgsl/gsl: general mathematical functions;
-- toml-f: configuration file, terminal;
-- M_CLI2: command line;
-- test-drive: unit test;
-- root-fortran: root lookup;
-- polyroot-fortran: polynomial root search;
-- quadrature-fortran: multidimensional Gauss-Legendre integral;
-- VTKFortran/H5part: storage and visualization;
-- Source Codes in Fortran90: Fortran 90 code.
+```sh
+>> meson setup build  # 配置 meson 构建目录
+>> meson compile -C build  # 编译
+```
 
-In addition, there are analysis of CAE models and visualization of numerical models,
-and technical details such as function integration, statistics, sorting, special functions, etc.
+在 `meson.build` 中，可以使用 `subproject` 函数引入 `seakeeping`：
+
+```sh
+seakeeping_dep = subproject('seakeeping').get_variable('seakeeping_dep')
+>> meson subprojects download  # 下载子项目
+```
+
+## 其他包
+
+这里列举其他适用于船舶耐波性问题的包：
+
+- minpack/nlopt-f：非线性方程组求解；
+- fftw/fftpack：快速傅里叶变换；
+- fgsl/gsl：通用数学函数；
+- toml-f：配置文件，终端；
+- M_CLI2：命令行；
+- test-drive：单元测试；
+- root-fortran：根查找；
+- polyroot-fortran：多项式根查找；
+- quadrature-fortran：多维高斯-勒让德积分；
+- VTKFortran/H5part：存储与可视化；
+- Source Codes in Fortran90: Fortran 90 代码。
+
+此外，还有 CAE 模型的解析和数值模型可视化，技术细节层面如函数积分、统计、排序、特殊函数等内容。
