@@ -3,8 +3,6 @@
 !>
 !> Seakeeping time series analysis <br>
 !> 耐波性时间序列分析
-!> @note fft 存在许可证（LGPL）风险（即使 fft 存在风险，我希望本包其他例程不服从 LGPL 协议），
-!> 借鉴了 https://people.math.sc.edu/Burkardt/f_src/fft_openmp/fft_openmp.html
 module seakeeping_tsa
 
     use seakeeping_constants, only: Pi
@@ -82,111 +80,5 @@ contains
         if (extend_) location = location - extend_size
 
     end function AMPD
-
-    !> Init the FFT <br>
-    !> 初始化 FFT 系数
-    pure subroutine ffti(n, w)
-        integer, intent(in) :: n
-        real(sk_real_kind), intent(out) :: w(n)
-        real(sk_real_kind) :: aw, arg
-        integer :: i
-
-        aw = 2*pi/n
-        do concurrent(i=1:n/2)
-            arg = aw*(i - 1)
-            w(2*i - 1) = cos(arg)
-            w(2*i) = sin(arg)
-        end do
-
-    end subroutine ffti
-
-    !> FFT <br>
-    !> 快速傅里叶变换
-    !> @note 反向（backward）快速傅里叶变换结果需要正则化
-    pure subroutine fft(n, x, y, w, back)
-        integer, intent(in) :: n
-        real(sk_real_kind), intent(inout) :: x(2*n)
-        real(sk_real_kind), intent(out) :: y(2*n)
-        real(sk_real_kind), intent(in) :: w(n)
-        logical, intent(in) :: back
-        integer :: m, mj, i
-        logical :: tgle
-
-        m = int(log(real(n, sk_real_kind))/log(1.99_sk_real_kind))
-        mj = 1
-        tgle = .true.
-        call step(n, mj, x(1), x((n/2)*2 + 1), y(1), y(mj*2 + 1), w, back)
-
-        if (n == 2) return
-        do i = 1, m - 2
-            mj = mj*2
-            if (tgle) then
-                call step(n, mj, y(1), y((n/2)*2 + 1), x(1), x(mj*2 + 1), w, back)
-                tgle = .false.
-            else
-                call step(n, mj, x(1), x((n/2)*2 + 1), y(1), y(mj*2 + 1), w, back)
-                tgle = .true.
-            end if
-        end do
-
-        if (tgle) x(:) = y(:)
-        mj = n/2
-        call step(n, mj, x(1), x((n/2)*2 + 1), y(1), y(mj*2 + 1), w, back)
-
-    end subroutine fft
-
-    !> FFT step <br>
-    !> FFT 单步
-    !> @note gfortran 启动并行 do concurrent：`-ftree-loop-vectorize -ftree-parallelize-loops=8`
-    pure subroutine step(n, mj, a, b, c, d, w, back)
-        integer, intent(in) :: n, mj
-        real(sk_real_kind), intent(in), dimension(n) :: a, b, w
-        real(sk_real_kind), intent(inout), dimension(n) :: c, d
-        logical, intent(in) :: back
-        integer :: mj2, lj, j, k, ja, jb, jc, jd, jw
-        real(sk_real_kind) :: wjw(2), ambr, ambu
-
-        mj2 = 2*mj
-        lj = n/mj2
-
-        do concurrent(j=0:lj - 1)
-            jw = j*mj
-            ja = jw
-            jb = ja
-            jc = j*mj2
-            jd = jc
-
-            wjw(1) = w(jw*2 + 1)
-            wjw(2) = w(jw*2 + 2)
-
-            if (back) wjw(2) = -wjw(2)
-            do k = 0, mj - 1
-                c((jc + k)*2 + 1) = a((ja + k)*2 + 1) + b((jb + k)*2 + 1)
-                c((jc + k)*2 + 2) = a((ja + k)*2 + 2) + b((jb + k)*2 + 2)
-
-                ambr = a((ja + k)*2 + 1) - b((jb + k)*2 + 1)
-                ambu = a((ja + k)*2 + 2) - b((jb + k)*2 + 2)
-
-                d((jd + k)*2 + 1) = wjw(1)*ambr - wjw(2)*ambu
-                d((jd + k)*2 + 2) = wjw(2)*ambr + wjw(1)*ambu
-            end do
-        end do
-
-    end subroutine step
-
-    !> FFT shift <br>
-    !> FFT 位移
-    pure function fftshift(x, back) result(y)
-        real(sk_real_kind), intent(in) :: x(:)
-        logical, intent(in) :: back
-        real(sk_real_kind) :: y(size(x))
-
-        if (back) then
-            y = cshift(x, shift=-ceiling(0.5_sk_real_kind*size(x)))
-        else
-            y = cshift(x, shift=-floor(0.5_sk_real_kind*size(x)))
-        end if
-
-    end function fftshift
 
 end module seakeeping_tsa
