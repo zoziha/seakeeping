@@ -2,7 +2,7 @@
 project(
     'seakeeping',
     'fortran',
-    version : '2.0.0',
+    version : '2.1.0',
     license : 'BSD-3-Clause',
     license_files : 'LICENSE',
     default_options : [
