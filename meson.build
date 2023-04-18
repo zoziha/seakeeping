@@ -2,7 +2,7 @@
 project(
     'seakeeping',
     'fortran',
-    version : '2.1.0',
+    version : '2.2.0',
     license : 'BSD-3-Clause',
     license_files : 'LICENSE',
     default_options : [
@@ -20,6 +20,7 @@ seakeeping_lib = library(
     version : meson.project_version(),
     install : true,
 )
+subdir('example')
 seakeeping_inc = seakeeping_lib.private_dir_include()
 seakeeping_dep = declare_dependency(
     link_with : seakeeping_lib,

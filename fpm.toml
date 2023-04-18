@@ -1,5 +1,5 @@
 name = "seakeeping"
-version = "2.1.0"
+version = "2.2.0"
 license = "BSD-3-Clause"
 author = "左志华"
 maintainer = "左志华（zuo.zhihua@qq.com）"
@@ -7,3 +7,5 @@ copyright = "Copyright 2022, 左志华"
 description = "Seakeeping Routines for Naval Architecture and Ocean Engineering"
 [install]
 library = true
+[fortran]
+implicit-external = true

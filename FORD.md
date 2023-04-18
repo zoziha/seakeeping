@@ -5,7 +5,8 @@ src_dir: src
 preprocess: false
 project_website: https://gitee.com/ship-motions/seakeeping
 project_download: https://gitee.com/ship-motions/seakeeping/releases
-output_dir: doc/api-html
+output_dir: _build/ford
+page_dir: ford
 author: 左志华
 author_description: 哈尔滨工程大学-船舶与海洋结构物设计制造，在读学生
 email: zuo.zhihua@qq.com
