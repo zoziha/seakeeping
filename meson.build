@@ -4,7 +4,7 @@ project(
     'fortran',
     version : '2.2.0',
     license : 'BSD-3-Clause',
-    license_files : 'LICENSE',
+    meson_version : '>=0.55.0',
     default_options : [
         'buildtype=debugoptimized',
         'fortran_std=f2008',
@@ -43,7 +43,7 @@ foreach source: seakeeping_src_filenames
     seakeeping_obj += 'src_'+source+obj_suffix
 endforeach
 install_subdir(
-    seakeeping_lib.path()+'.p',
+    seakeeping_lib.full_path()+'.p',
     install_dir: 'include'/meson.project_name(),
     strip_directory: true,
     exclude_files: [
