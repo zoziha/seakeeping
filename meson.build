@@ -2,7 +2,7 @@
 project(
     'seakeeping',
     'fortran',
-    version : '2.2.0',
+    version : '2.3.20230518',
     license : 'BSD-3-Clause',
     meson_version : '>=0.55.0',
     default_options : [
