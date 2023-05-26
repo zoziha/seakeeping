@@ -108,33 +108,19 @@ contains
 
     end function vdeep
 
-    !> JONSWAP 波谱模型计算频段有义波高
-    !> Ref: https://blog.csdn.net/yx171532/article/details/113847209
-    pure subroutine jonswap_waveheight(omega, domega, tz, hs, wave_height)
+    !> ITTC 双参数波能谱模型计算频段有义波高
+    pure subroutine ittc_waveheight(omega, t1, hs, wave_height)
         real(kind=rk), intent(in) :: omega  !! 波浪角频率, rad/s
-        real(kind=rk), intent(in) :: domega     !! 采样频率, Hz
-        real(kind=rk), intent(in) :: tz     !! 平均跨零周期, s, 海浪在水面上传播的距离
+        real(kind=rk), intent(in) :: t1     !! 平均周期, s, T1 = 2*pi*m0/m1
         real(kind=rk), intent(in) :: hs     !! 有义波高, m
         real(kind=rk), intent(out) :: wave_height !! 频段有义波高, m
-        real(kind=rk) :: hsig, bw, wave_energy, fp
+        real(kind=rk) :: hsig
 
-        real(kind=rk), parameter :: gamma = 3.3_rk !! 峰度系数(3~5), 标准值3.3
-        real(kind=rk), parameter :: k = 0.6063_rk + 0.1164_rk*sqrt(gamma) - 0.01224_rk*gamma !! K=Tz/Tp
+        associate (a => 173*hs**2/t1**4, b => 691/t1**4)
+            hsig = a*exp(-b/omega**4)/omega**5
+            wave_height = 4*sqrt(hsig)
+        end associate
 
-        fp = k/tz
-
-        if (omega <= pi/tz) then
-            ! 小尺度波动
-            hsig = 0.07_rk*gamma*exp(-0.5_rk*((omega - pi2*fp)/(pi*gamma*fp))**2)*hs**2/omega**5
-        else
-            ! 大尺度波动
-            hsig = 0.09_rk*gamma**2*exp(-1.25_rk*(tz*omega)**(-4))*hs**2/omega**4
-        end if
-
-        bw = domega*omega  ! 波能频带宽度
-        wave_energy = hsig**2*bw  ! 波能
-        wave_height = sqrt(wave_energy/pi2)
-
-    end subroutine jonswap_waveheight
+    end subroutine ittc_waveheight
 
 end module seakeeping_wave
