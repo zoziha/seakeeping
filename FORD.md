@@ -11,7 +11,6 @@ author: 左志华
 author_description: 哈尔滨工程大学-船舶与海洋结构物设计制造，在读学生
 email: zuo.zhihua@qq.com
 website: https://gitee.com/zoziha
-author_pic: https://s2.loli.net/2022/11/18/pJyQH39mYFU4wET.png
 display: public
 graph: false
 source: true
@@ -22,4 +21,4 @@ print_creation_date: true
 creation_date: %Y-%m-%d %H:%M %z
 ---
 
-{!README-CN.md!}
+{!README.md!}

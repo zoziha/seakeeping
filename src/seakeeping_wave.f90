@@ -89,12 +89,11 @@ contains
 
     end function wenergy
 
-    !> Wave amplitude <br>
-    !> 单位波幅：\( \zeta = \sin(kx\cos\beta + ky\sin\beta + \omega t) \)
-    real(rk) pure function zeta(k, x, y, w, t, beta)
-        real(rk), intent(in) :: k, x, y, w, t, beta
+    !> 单位波幅：\\( \zeta = \sin(kx\cos\beta + ky\sin\beta + \omega t + phase) \\)
+    real(rk) pure function zeta(k, x, y, w, t, beta, phase)
+        real(rk), intent(in) :: k, x, y, w, t, beta, phase
 
-        zeta = sin(k*x*cos(beta) + k*y*sin(beta) + w*t)
+        zeta = sin(k*x*cos(beta) + k*y*sin(beta) + w*t + phase)
 
     end function zeta
 
