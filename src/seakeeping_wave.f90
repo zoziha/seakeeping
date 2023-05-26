@@ -108,19 +108,20 @@ contains
 
     end function vdeep
 
-    !> ITTC 双参数波能谱模型计算频段有义波高
-    pure subroutine ittc_waveheight(omega, t1, hs, wave_height)
+    !> ITTC 双参数波能谱模型计算频段有义波幅
+    pure subroutine ittc_waveamplitude(omega, domega, t1, hs, wave_amplitude)
         real(kind=rk), intent(in) :: omega  !! 波浪角频率, rad/s
+        real(kind=rk), intent(in) :: domega !! 频率间隔, rad/s
         real(kind=rk), intent(in) :: t1     !! 平均周期, s, T1 = 2*pi*m0/m1
         real(kind=rk), intent(in) :: hs     !! 有义波高, m
-        real(kind=rk), intent(out) :: wave_height !! 频段有义波高, m
+        real(kind=rk), intent(out) :: wave_amplitude !! 频段有义波幅, m
         real(kind=rk) :: hsig
 
         associate (a => 173*hs**2/t1**4, b => 691/t1**4)
             hsig = a*exp(-b/omega**4)/omega**5
-            wave_height = 4*sqrt(hsig)
+            wave_amplitude = sqrt(2*hsig*domega)  ! A = sqrt(2*S_\omega*d\omega)
         end associate
 
-    end subroutine ittc_waveheight
+    end subroutine ittc_waveamplitude
 
 end module seakeeping_wave

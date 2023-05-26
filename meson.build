@@ -2,15 +2,16 @@
 project(
     'seakeeping',
     'fortran',
-    version : '2.3.20230518',
+    version : '2.4.20230526',
     license : 'BSD-3-Clause',
-    meson_version : '>=0.55.0',
+    meson_version : '>=0.60.0',
     default_options : [
         'buildtype=debugoptimized',
         'fortran_std=f2008',
         'default_library=both',
     ],
 )
+
 seakeeping_src_filenames = []
 seakeeping_src = files()
 subdir('src')
@@ -54,6 +55,7 @@ install_subdir(
         seakeeping_obj,
     ]
 )
+
 pkg = import('pkgconfig')
 pkg.generate(
     name : meson.project_name(),
