@@ -1,7 +1,7 @@
 !> leapfrog 算法计算量相对较少，精度适中，可用于力学求解
 module seakeeping_leapfrog
 
-    use seakeeping_kinds, only: sk_real_kind
+    use seakeeping_kinds, only: rk => sk_real_kind
     implicit none
 
     private
@@ -10,41 +10,36 @@ module seakeeping_leapfrog
 contains
 
     !> 速度比位移、加速度快半步长，本例程仅用作力学求解，求解一段时间内的力学变化，并更新时间
-    subroutine leapfrog(func, x0, v0, a0, t0, m, dt, x1, v1, a1, n)
+    subroutine leapfrog(func, x, v, a, t, m, dt, n)
         external :: func
-        real(kind=sk_real_kind), intent(in), dimension(*) :: x0, v0, a0
-        real(kind=sk_real_kind), intent(inout) :: t0
+        real(kind=rk), intent(inout), dimension(*) :: x, v, a
+        real(kind=rk), intent(inout) :: t
         integer, intent(in) :: m
-        real(kind=sk_real_kind), intent(in) :: dt
-        real(kind=sk_real_kind), intent(out), dimension(*) :: x1, v1, a1
+        real(kind=rk), intent(in) :: dt
         integer, intent(in) :: n
 
-        real(kind=sk_real_kind) :: t, vtmp(n)
+        real(kind=rk) :: t0, vtmp(n)
         integer :: i
 
-        x1(:n) = x0(:n)
-        v1(:n) = v0(:n)
-        a1(:n) = a0(:n)
-
         do i = 1, m
-            t = t0 + dt*i
-            x1(:n) = x1(:n) + v1(:n)*dt
-            vtmp = v1(:n) + a1(:n)*dt/2
-            call func(t, x1, vtmp, a1)
-            v1(:n) = v1(:n) + a1(:n)*dt
+            t0 = t + dt*i
+            x(:n) = x(:n) + v(:n)*dt
+            vtmp = v(:n) + a(:n)*dt/2
+            call func(t, x, vtmp, a)
+            v(:n) = v(:n) + a(:n)*dt
         end do
 
-        t0 = t
+        if (m > 0) t = t0
 
     end subroutine leapfrog
 
     !> 初始化leapfrog算法，初始化加速度及推进速度半步长
     subroutine leapfrog_init(func, x0, v0, a0, t0, dt, n)
         external :: func
-        real(kind=sk_real_kind), intent(in), dimension(*) :: x0
-        real(kind=sk_real_kind), intent(inout), dimension(*) :: v0
-        real(kind=sk_real_kind), intent(out), dimension(*) :: a0
-        real(kind=sk_real_kind), intent(in) :: t0, dt
+        real(kind=rk), intent(in), dimension(*) :: x0
+        real(kind=rk), intent(inout), dimension(*) :: v0
+        real(kind=rk), intent(out), dimension(*) :: a0
+        real(kind=rk), intent(in) :: t0, dt
         integer, intent(in) :: n
 
         call func(t0, x0, v0, a0)
@@ -54,9 +49,9 @@ contains
 
     !> 速度后退半步长，使其与位移、加速度同步
     subroutine leapfrog_final(v0, a0, dt, n)
-        real(kind=sk_real_kind), intent(inout), dimension(*) :: v0
-        real(kind=sk_real_kind), intent(in), dimension(*) :: a0
-        real(kind=sk_real_kind), intent(in) :: dt
+        real(kind=rk), intent(inout), dimension(*) :: v0
+        real(kind=rk), intent(in), dimension(*) :: a0
+        real(kind=rk), intent(in) :: dt
         integer, intent(in) :: n
 
         v0(:n) = v0(:n) - a0(:n)*dt/2

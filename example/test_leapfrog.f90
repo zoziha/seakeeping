@@ -9,7 +9,7 @@ program test_leapfrog
     call leapfrog_init(func, x, v, a, t, h, 3)
 
     do while (t <= 1.01_rk)
-        call leapfrog(func, x, v, a, t, 1, h, x, v, a, 3)
+        call leapfrog(func, x, v, a, t, 1, h, 3)
     end do
 
     call leapfrog_final(v, a, h, 3) ! 将速度与位移、加速度同步（可选）

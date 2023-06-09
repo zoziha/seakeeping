@@ -3,7 +3,7 @@ version = "2.4.20230526"
 license = "BSD-3-Clause"
 author = "左志华"
 maintainer = "左志华（zuo.zhihua@qq.com）"
-copyright = "Copyright 2022, 左志华"
+copyright = "Copyright 2022~2023, 左志华"
 description = "Seakeeping Routines for Naval Architecture and Ocean Engineering"
 
 [install]
@@ -11,3 +11,6 @@ library = true
 
 [fortran]
 implicit-external = true
+
+[dev-dependencies]
+test-drive = { git='https://gitee.com/fortran-base/test-drive', tag='v0.4.0' }

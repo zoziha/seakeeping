@@ -21,7 +21,10 @@ seakeeping_lib = library(
     version : meson.project_version(),
     install : true,
 )
+
 subdir('example')
+subdir('test')
+
 seakeeping_inc = seakeeping_lib.private_dir_include()
 seakeeping_dep = declare_dependency(
     link_with : seakeeping_lib,
