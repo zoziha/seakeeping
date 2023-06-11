@@ -7,6 +7,9 @@ module seakeeping_collection
     use seakeeping_collection_stack_real
     use seakeeping_collection_stack_int
     use seakeeping_collection_stack
+    use seakeeping_collection_vector_real
+    use seakeeping_collection_vector_int
+    use seakeeping_collection_vector
     implicit none
 
 end module seakeeping_collection

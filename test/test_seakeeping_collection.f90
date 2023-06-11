@@ -7,7 +7,8 @@ module test_seakeeping_collection
                                  queue_int, queue_int_iterator, &
                                  stack, stack_iterator, &
                                  stack_real, stack_real_iterator, &
-                                 stack_int, stack_int_iterator
+                                 stack_int, stack_int_iterator, &
+                                 vector, vector_int, vector_real
     implicit none
 
     private
@@ -24,7 +25,10 @@ contains
                   new_unittest('queue_real', test_queue_real), &
                   new_unittest('stack', test_stack), &
                   new_unittest('stack_int', test_stack_int), &
-                  new_unittest('stack_real', test_stack_real) &
+                  new_unittest('stack_real', test_stack_real), &
+                  new_unittest('vector', test_vector), &
+                  new_unittest('vector_int', test_vector_int), &
+                  new_unittest('vector_real', test_vector_real) &
                   ])
 
     end subroutine collect_collection
@@ -130,5 +134,50 @@ contains
         call iter%clear()
 
     end subroutine test_stack_int
+
+    subroutine test_vector(error)
+        type(error_type), intent(out), allocatable :: error
+        type(vector) :: v
+        class(*), allocatable :: item
+
+        call v%init()
+        call v%push(1)
+        call v%pop(item)
+
+        select type (item)
+        type is (integer)
+            call check(error, item, 1)
+            call v%clear()
+        end select
+
+    end subroutine test_vector
+
+    subroutine test_vector_int(error)
+        type(error_type), intent(out), allocatable :: error
+        type(vector_int) :: v
+        integer :: item
+
+        call v%init()
+        call v%push(1)
+        call v%pop(item)
+
+        call check(error, item, 1)
+        call v%clear()
+
+    end subroutine test_vector_int
+
+    subroutine test_vector_real(error)
+        type(error_type), intent(out), allocatable :: error
+        type(vector_real) :: v
+        real(rk) :: item
+
+        call v%init()
+        call v%push(1.0_rk)
+        call v%pop(item)
+
+        call check(error, item, 1.0_rk)
+        call v%clear()
+
+    end subroutine test_vector_real
 
 end module test_seakeeping_collection
