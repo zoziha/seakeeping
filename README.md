@@ -1,5 +1,9 @@
 # 船舶耐波性包
 
+![seakeeping](https://img.shields.io/badge/Seakeeping-v2.5.20230611-blueviolet)
+[![license](https://img.shields.io/badge/License-BSD--3-important)](LICENSE)
+![Compiler](https://img.shields.io/badge/Compiler-MSYS2--GFortran^12.2.0-brightgreen)
+
 基于编程经验，对特定领域编写更详实的表达型代码，有助于从底层提高代码的可读性、可维护性、可描述性。
 
 于是，形成了这个包，用于表达、计算船舶耐波性问题。事实证明，本包的确提高了我的编码效率与代码复用。

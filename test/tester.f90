@@ -4,6 +4,7 @@ program tester
     use, intrinsic :: iso_fortran_env, only: error_unit
     use testdrive, only: run_testsuite, new_testsuite, testsuite_type
     use test_seakeeping_leapfrog, only: collect_leapfrog
+    use test_seakeeping_collection, only: collect_collection
     implicit none
 
     integer :: stat, is
@@ -13,7 +14,8 @@ program tester
     stat = 0
 
     allocate (testsuites, source=[ &
-              new_testsuite("leapfrog", collect_leapfrog) &
+              new_testsuite("leapfrog", collect_leapfrog), &
+              new_testsuite("collection", collect_collection) &
               ])
 
     do is = 1, size(testsuites)

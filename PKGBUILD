@@ -3,7 +3,7 @@
 _realname=seakeeping
 pkgbase=mingw-w64-${_realname}
 pkgname="${MINGW_PACKAGE_PREFIX}-${_realname}"
-pkgver=2.4.20230526
+pkgver=2.5.20230611
 pkgrel=1
 arch=('any')
 mingw_arch=('mingw32' 'mingw64' 'ucrt64')

@@ -4,7 +4,8 @@ if not testdrive_dep.found()
 endif
 
 test_src = files(
-    'test_leapfrog.f90',
+    'test_seakeeping_leapfrog.f90',
+    'test_seakeeping_collection.f90',
 )
 
 test_lib = static_library(

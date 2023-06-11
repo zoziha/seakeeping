@@ -1,4 +1,8 @@
 seakeeping_src_filenames += [
+    'seakeeping_collection_queue_int.f90',
+    'seakeeping_collection_queue_real.f90',
+    'seakeeping_collection_queue.f90',
+    'seakeeping_collection.f90',
     'seakeeping_constants.f90',
     'seakeeping_geometry.f90',
     'seakeeping_kinds.F90',
