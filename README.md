@@ -1,8 +1,8 @@
 # 船舶耐波性包
 
 ![seakeeping](https://img.shields.io/badge/Seakeeping-v2.5.20230611-blueviolet)
-[![license](https://img.shields.io/badge/License-BSD--3-important)](LICENSE)
-![Compiler](https://img.shields.io/badge/Compiler-MSYS2--GFortran^12.2.0-brightgreen)
+[![license](https://img.shields.io/badge/License-BSD--3-brightgreen)](LICENSE)
+![Fortran](https://img.shields.io/badge/Fortran-^2008-purple)
 
 基于编程经验，对特定领域编写更详实的表达型代码，有助于从底层提高代码的可读性、可维护性、可描述性。
 
