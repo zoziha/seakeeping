@@ -1,3 +1,4 @@
+---
 title: Leap Frog Integration Method
 ---
 
@@ -12,3 +13,5 @@ title: Leap Frog Integration Method
 得到新的数据集合，并更新位移、加速度所对应的时间。
 3. `[[seakeeping_leapfrog(module):leapfrog_final(subroutine)]]` 将数据集合中的**速度后退半步长**，
 使得速度与位移、加速度对应的时间相同。
+
+备注：由于在船舶力学领域，速度verlet积分法的应用场景有限，所以仅支持蛙跳积分法。

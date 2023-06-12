@@ -10,13 +10,12 @@ module seakeeping_collection_vector_real
     !> Vector_real 实数向量
     type vector_real
         private
-        integer :: n  !! 有效向量长度
+        integer, public :: len  !! 有效向量长度
         real(rk), allocatable :: items(:)  !! 实数数组
     contains
         procedure :: init
         procedure :: push, pop
         procedure :: get, set
-        procedure :: size
         procedure :: clear
         procedure, private :: extend
     end type vector_real
@@ -27,7 +26,7 @@ contains
     subroutine init(self)
         class(vector_real), intent(inout) :: self
 
-        self%n = 0
+        self%len = 0
         if (.not. allocated(self%items)) allocate (self%items(256))
 
     end subroutine init
@@ -49,9 +48,9 @@ contains
         real(rk), intent(in) :: item
         intrinsic :: size
 
-        if (self%n == size(self%items)) call self%extend()
-        self%n = self%n + 1
-        self%items(self%n) = item
+        if (self%len == size(self%items)) call self%extend()
+        self%len = self%len + 1
+        self%items(self%len) = item
 
     end subroutine push
 
@@ -60,9 +59,9 @@ contains
         class(vector_real), intent(inout) :: self
         real(rk), intent(out), optional :: item
 
-        if (self%n == 0) return
-        if (present(item)) item = self%items(self%n)
-        self%n = self%n - 1
+        if (self%len == 0) return
+        if (present(item)) item = self%items(self%len)
+        self%len = self%len - 1
 
     end subroutine pop
 
@@ -72,7 +71,7 @@ contains
         integer, intent(in) :: index
         real(rk), intent(out) :: item
 
-        if (index < 1 .or. index > self%n) return
+        if (index < 1 .or. index > self%len) return
         item = self%items(index)
 
     end subroutine get
@@ -83,27 +82,17 @@ contains
         integer, intent(in) :: index
         real(rk), intent(in) :: item
 
-        if (index < 1 .or. index > self%n) return
+        if (index < 1 .or. index > self%len) return
         self%items(index) = item
 
     end subroutine set
 
-    !> 向量长度
-    pure function size(self) result(n)
-        class(vector_real), intent(in) :: self
-        integer :: n
-
-        n = self%n
-
-    end function size
-
     !> 向量清空
     subroutine clear(self)
         class(vector_real), intent(inout) :: self
-        integer :: i
 
         deallocate (self%items)
-        self%n = 0
+        self%len = 0
 
     end subroutine clear
 

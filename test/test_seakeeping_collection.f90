@@ -43,6 +43,9 @@ contains
         iter = q%iterator()
         call iter%next(item)
 
+        call check(error, q%len, 1)
+        if (allocated(error)) return
+
         select type (item)
         type is (integer)
             call check(error, item, 1)
@@ -62,6 +65,9 @@ contains
         iter = q%iterator()
         call iter%next(item)
 
+        call check(error, q%len, 1)
+        if (allocated(error)) return
+
         call check(error, item, 1.0_rk)
         call q%clear()
         call iter%clear()
@@ -78,6 +84,9 @@ contains
         iter = q%iterator()
         call iter%next(item)
 
+        call check(error, q%len, 1)
+        if (allocated(error)) return
+
         call check(error, item, 1)
         call q%clear()
         call iter%clear()
@@ -93,6 +102,9 @@ contains
         call s%push(1)
         iter = s%iterator()
         call iter%next(item)
+
+        call check(error, s%len, 1)
+        if (allocated(error)) return
 
         select type (item)
         type is (integer)
@@ -113,6 +125,9 @@ contains
         iter = s%iterator()
         call iter%next(item)
 
+        call check(error, s%len, 1)
+        if (allocated(error)) return
+
         call check(error, item, 1.0_rk)
         call s%clear()
         call iter%clear()
@@ -129,6 +144,9 @@ contains
         iter = s%iterator()
         call iter%next(item)
 
+        call check(error, s%len, 1)
+        if (allocated(error)) return
+
         call check(error, item, 1)
         call s%clear()
         call iter%clear()
@@ -143,6 +161,9 @@ contains
         call v%init()
         call v%push(1)
         call v%pop(item)
+
+        call check(error, v%len, 0)
+        if (allocated(error)) return
 
         select type (item)
         type is (integer)
@@ -161,6 +182,9 @@ contains
         call v%push(1)
         call v%pop(item)
 
+        call check(error, v%len, 0)
+        if (allocated(error)) return
+
         call check(error, item, 1)
         call v%clear()
 
@@ -174,6 +198,9 @@ contains
         call v%init()
         call v%push(1.0_rk)
         call v%pop(item)
+
+        call check(error, v%len, 0)
+        if (allocated(error)) return
 
         call check(error, item, 1.0_rk)
         call v%clear()

@@ -15,13 +15,12 @@ module seakeeping_collection_vector
     !> Vector 泛型向量
     type vector
         private
-        integer :: n  !! 有效向量长度
+        integer, public :: len  !! 有效向量长度
         type(node), allocatable :: items(:)  !! 泛型数组
     contains
         procedure :: init
         procedure :: push, pop
         procedure :: get, set
-        procedure :: size
         procedure :: clear
         procedure, private :: extend
     end type vector
@@ -32,7 +31,7 @@ contains
     subroutine init(self)
         class(vector), intent(inout) :: self
 
-        self%n = 0
+        self%len = 0
         if (.not. allocated(self%items)) allocate (self%items(256))
 
     end subroutine init
@@ -54,9 +53,9 @@ contains
         class(*), intent(in) :: item
         intrinsic :: size
 
-        if (self%n == size(self%items)) call self%extend()
-        self%n = self%n + 1
-        allocate (self%items(self%n)%item, source=item)
+        if (self%len == size(self%items)) call self%extend()
+        self%len = self%len + 1
+        allocate (self%items(self%len)%item, source=item)
 
     end subroutine push
 
@@ -65,13 +64,13 @@ contains
         class(vector), intent(inout) :: self
         class(*), intent(out), optional, allocatable :: item
 
-        if (self%n == 0) return
+        if (self%len == 0) return
         if (present(item)) then
-            call move_alloc(self%items(self%n)%item, item)
+            call move_alloc(self%items(self%len)%item, item)
         else
-            deallocate (self%items(self%n)%item)
+            deallocate (self%items(self%len)%item)
         end if
-        self%n = self%n - 1
+        self%len = self%len - 1
 
     end subroutine pop
 
@@ -81,7 +80,7 @@ contains
         integer, intent(in) :: index
         class(*), intent(out), allocatable :: item
 
-        if (index < 1 .or. index > self%n) return
+        if (index < 1 .or. index > self%len) return
         allocate (item, source=self%items(index)%item)
 
     end subroutine get
@@ -92,27 +91,17 @@ contains
         integer, intent(in) :: index
         class(*), intent(in) :: item
 
-        if (index < 1 .or. index > self%n) return
+        if (index < 1 .or. index > self%len) return
         allocate (self%items(index)%item, source=item)
 
     end subroutine set
 
-    !> 向量长度
-    pure function size(self) result(n)
-        class(vector), intent(in) :: self
-        integer :: n
-
-        n = self%n
-
-    end function size
-
     !> 向量清空
     subroutine clear(self)
         class(vector), intent(inout) :: self
-        integer :: i
 
         deallocate (self%items)
-        self%n = 0
+        self%len = 0
 
     end subroutine clear
 

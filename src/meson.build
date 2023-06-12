@@ -5,6 +5,8 @@ seakeeping_src_filenames += [
     'seakeeping_collection_stack_int.f90',
     'seakeeping_collection_stack_real.f90',
     'seakeeping_collection_stack.f90',
+    'seakeeping_collection_vector_int.f90',
+    'seakeeping_collection_vector_real.f90',
     'seakeeping_collection_vector.f90',
     'seakeeping_collection.f90',
     'seakeeping_constants.f90',

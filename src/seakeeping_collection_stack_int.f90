@@ -19,14 +19,13 @@ module seakeeping_collection_stack_int
     !> 堆栈
     type stack_int
         private
-        integer :: num_nodes = 0 !! number of nodes in the stack_int
+        integer, public :: len = 0 !! number of nodes in the stack_int
         type(node), pointer :: head => null() !! head of the stack_int
         type(node), pointer :: tail => null() !! tail of the stack_int
     contains
         procedure :: push => stack_int_push
         procedure :: pop => stack_int_pop
         procedure :: iterator
-        procedure :: size => stack_int_size
         procedure :: clear => stack_int_clear
     end type stack_int
 
@@ -72,7 +71,7 @@ contains
             allocate (self%head, source=init_node(item))
             self%tail => self%head
         end if
-        self%num_nodes = self%num_nodes + 1
+        self%len = self%len + 1
 
     end subroutine stack_int_push
 
@@ -88,10 +87,10 @@ contains
             end if
             curr_node => self%tail
             self%tail => curr_node%prev
-            self%num_nodes = self%num_nodes - 1
+            self%len = self%len - 1
             nullify (curr_node%prev, curr_node%next)
             deallocate (curr_node)
-            if (self%num_nodes == 0) then
+            if (self%len == 0) then
                 nullify (self%head, self%tail)
             end if
         end if
@@ -106,20 +105,12 @@ contains
 
     end function iterator
 
-    !> Get the size of the stack_int
-    pure integer function stack_int_size(self) result(size)
-        class(stack_int), intent(in) :: self
-
-        size = self%num_nodes
-
-    end function stack_int_size
-
     !> Clear the stack_int
     pure subroutine stack_int_clear(self)
         class(stack_int), intent(inout) :: self
         type(node), pointer :: curr_node
 
-        do while (self%num_nodes > 0)
+        do while (self%len > 0)
             curr_node => self%head
             if (associated(curr_node%next)) then
                 nullify (curr_node%next%prev)
@@ -127,7 +118,7 @@ contains
             end if
             call curr_node%clear()
             deallocate (curr_node)
-            self%num_nodes = self%num_nodes - 1
+            self%len = self%len - 1
         end do
         nullify (self%head, self%tail)
 
