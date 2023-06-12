@@ -76,7 +76,7 @@ contains
     end subroutine stack_int_push
 
     !> pop an item from the stack_int
-    subroutine stack_int_pop(self, item)
+    pure subroutine stack_int_pop(self, item)
         class(stack_int), intent(inout) :: self
         integer, intent(out), optional :: item
         type(node), pointer :: curr_node
@@ -133,7 +133,7 @@ contains
     end subroutine stack_int_iterator_clear
 
     !> Get the next item from the stack_int_iterator
-    subroutine stack_int_iterator_next(self, item)
+    pure subroutine stack_int_iterator_next(self, item)
         class(stack_int_iterator), intent(inout) :: self
         integer, intent(out) :: item
 

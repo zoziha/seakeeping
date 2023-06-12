@@ -1,4 +1,4 @@
-!> Vector 实数向量
+!> Vector 整型向量
 module seakeeping_collection_vector_int
 
     use seakeeping_kinds, only: rk => sk_real_kind
@@ -7,11 +7,11 @@ module seakeeping_collection_vector_int
     private
     public :: vector_int
 
-    !> Vector_int 实数向量
+    !> Vector_int 整型向量
     type vector_int
         private
         integer, public :: len  !! 有效向量长度
-        integer, allocatable :: items(:)  !! 实数数组
+        integer, allocatable :: items(:)  !! 整型数组
     contains
         procedure :: init
         procedure :: push, pop
@@ -23,7 +23,7 @@ module seakeeping_collection_vector_int
 contains
 
     !> 初始化向量
-    subroutine init(self)
+    pure subroutine init(self)
         class(vector_int), intent(inout) :: self
 
         self%len = 0
@@ -32,7 +32,7 @@ contains
     end subroutine init
 
     !> 向量扩容
-    subroutine extend(self)
+    pure subroutine extend(self)
         class(vector_int), intent(inout) :: self
         integer, allocatable :: tmp(:)
 
@@ -42,7 +42,7 @@ contains
     end subroutine extend
 
     !> 向量压入
-    subroutine push(self, item)
+    pure subroutine push(self, item)
         class(vector_int), intent(inout) :: self
         integer, intent(in) :: item
 
@@ -53,7 +53,7 @@ contains
     end subroutine push
 
     !> 向量弹出
-    subroutine pop(self, item)
+    pure subroutine pop(self, item)
         class(vector_int), intent(inout) :: self
         integer, intent(out), optional :: item
 
@@ -64,7 +64,7 @@ contains
     end subroutine pop
 
     !> 向量获取
-    subroutine get(self, index, item)
+    pure subroutine get(self, index, item)
         class(vector_int), intent(in) :: self
         integer, intent(in) :: index
         integer, intent(out) :: item
@@ -75,7 +75,7 @@ contains
     end subroutine get
 
     !> 向量设置
-    subroutine set(self, index, item)
+    pure subroutine set(self, index, item)
         class(vector_int), intent(inout) :: self
         integer, intent(in) :: index
         integer, intent(in) :: item
@@ -86,7 +86,7 @@ contains
     end subroutine set
 
     !> 向量清空
-    subroutine clear(self)
+    pure subroutine clear(self)
         class(vector_int), intent(inout) :: self
 
         deallocate (self%items)

@@ -74,7 +74,7 @@ contains
     end subroutine queue_enqueue
 
     !> Dequeue an item from the queue
-    subroutine queue_dequeue(self, item)
+    pure subroutine queue_dequeue(self, item)
         class(queue_real), intent(inout) :: self
         real(rk), intent(out), optional :: item
         type(node), pointer :: curr_node
@@ -96,7 +96,7 @@ contains
     end subroutine queue_dequeue
 
     !> Get an queue_real_iterator for the queue
-    type(queue_real_iterator)  function iterator(self) result(iter)
+    type(queue_real_iterator) function iterator(self) result(iter)
         class(queue_real), intent(in) :: self
 
         iter%ptr => self%head
@@ -128,7 +128,7 @@ contains
     end subroutine queue_iterator_clear
 
     !> Get the next item from the queue_real_iterator
-    subroutine queue_iterator_next(self, item)
+    pure subroutine queue_iterator_next(self, item)
         class(queue_real_iterator), intent(inout) :: self
         real(rk), intent(out) :: item
 

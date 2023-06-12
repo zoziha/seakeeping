@@ -28,7 +28,7 @@ module seakeeping_collection_vector
 contains
 
     !> 初始化向量
-    subroutine init(self)
+    pure subroutine init(self)
         class(vector), intent(inout) :: self
 
         self%len = 0
@@ -37,7 +37,7 @@ contains
     end subroutine init
 
     !> 向量扩容
-    subroutine extend(self)
+    pure subroutine extend(self)
         class(vector), intent(inout) :: self
         type(node), allocatable :: tmp(:)
         intrinsic :: size
@@ -48,7 +48,7 @@ contains
     end subroutine extend
 
     !> 向量压入
-    subroutine push(self, item)
+    pure subroutine push(self, item)
         class(vector), intent(inout) :: self
         class(*), intent(in) :: item
         intrinsic :: size
@@ -86,7 +86,7 @@ contains
     end subroutine get
 
     !> 向量设置
-    subroutine set(self, index, item)
+    pure subroutine set(self, index, item)
         class(vector), intent(inout) :: self
         integer, intent(in) :: index
         class(*), intent(in) :: item
@@ -97,7 +97,7 @@ contains
     end subroutine set
 
     !> 向量清空
-    subroutine clear(self)
+    pure subroutine clear(self)
         class(vector), intent(inout) :: self
 
         deallocate (self%items)

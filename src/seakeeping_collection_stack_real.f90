@@ -77,7 +77,7 @@ contains
     end subroutine stack_real_push
 
     !> pop an item from the stack_real
-    subroutine stack_real_pop(self, item)
+    pure subroutine stack_real_pop(self, item)
         class(stack_real), intent(inout) :: self
         real(rk), intent(out), optional :: item
         type(node), pointer :: curr_node
@@ -134,7 +134,7 @@ contains
     end subroutine stack_real_iterator_clear
 
     !> Get the next item from the stack_real_iterator
-    subroutine stack_real_iterator_next(self, item)
+    pure subroutine stack_real_iterator_next(self, item)
         class(stack_real_iterator), intent(inout) :: self
         real(rk), intent(out) :: item
 

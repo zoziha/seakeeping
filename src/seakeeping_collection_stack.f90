@@ -101,7 +101,7 @@ contains
     end subroutine stack_pop
 
     !> Get an stack_iterator for the stack
-    type(stack_iterator)  function iterator(self) result(iter)
+    type(stack_iterator) function iterator(self) result(iter)
         class(stack), intent(in) :: self
 
         iter%ptr => self%head

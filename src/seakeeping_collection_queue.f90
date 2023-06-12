@@ -98,7 +98,7 @@ contains
     end subroutine queue_dequeue
 
     !> Get an queue_iterator for the queue
-    type(queue_iterator)  function iterator(self) result(iter)
+    type(queue_iterator) function iterator(self) result(iter)
         class(queue), intent(in) :: self
 
         iter%ptr => self%head
