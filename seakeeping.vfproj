@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VisualStudioProject ProjectType="typeDynamicLibrary" ProjectCreator="Intel Fortran" Keyword="Dll" Version="11.0" ProjectIdGuid="{6AC0732D-DD27-444F-A178-7F19579D43A9}">
+	<Platforms>
+		<Platform Name="Win32"/>
+		<Platform Name="x64"/></Platforms>
+	<Configurations>
+		<Configuration Name="Debug|Win32" ConfigurationType="typeDynamicLibrary">
+				<Tool Name="VFFortranCompilerTool" SuppressStartupBanner="true" DebugInformationFormat="debugEnabled" Optimization="optimizeDisabled" WarnInterfaces="true" Traceback="true" BoundsCheck="true" StackFrameCheck="true" RuntimeLibrary="rtMultiThreadedDebugDLL"/>
+				<Tool Name="VFLinkerTool" LinkIncremental="linkIncrementalNo" SuppressStartupBanner="true" GenerateDebugInformation="true" SubSystem="subSystemWindows" LinkDLL="true"/>
+				<Tool Name="VFResourceCompilerTool"/>
+				<Tool Name="VFMidlTool" SuppressStartupBanner="true"/>
+				<Tool Name="VFCustomBuildTool"/>
+				<Tool Name="VFPreLinkEventTool"/>
+				<Tool Name="VFPreBuildEventTool"/>
+				<Tool Name="VFPostBuildEventTool"/>
+				<Tool Name="VFManifestTool" SuppressStartupBanner="true"/></Configuration>
+		<Configuration Name="Debug|x64" ConfigurationType="typeDynamicLibrary">
+				<Tool Name="VFFortranCompilerTool" SuppressStartupBanner="true" DebugInformationFormat="debugEnabled" MultiProcessorCompilation="true" Optimization="optimizeDisabled" WarnInterfaces="true" Traceback="true" BoundsCheck="true" StackFrameCheck="true" RuntimeLibrary="rtMultiThreadedDebugDLL"/>
+				<Tool Name="VFLinkerTool" LinkIncremental="linkIncrementalNo" SuppressStartupBanner="true" GenerateDebugInformation="true" SubSystem="subSystemWindows" LinkDLL="true"/>
+				<Tool Name="VFResourceCompilerTool"/>
+				<Tool Name="VFMidlTool" SuppressStartupBanner="true" TargetEnvironment="midlTargetAMD64"/>
+				<Tool Name="VFCustomBuildTool"/>
+				<Tool Name="VFPreLinkEventTool"/>
+				<Tool Name="VFPreBuildEventTool"/>
+				<Tool Name="VFPostBuildEventTool"/>
+				<Tool Name="VFManifestTool" SuppressStartupBanner="true"/></Configuration>
+		<Configuration Name="Release|Win32" ConfigurationType="typeDynamicLibrary">
+				<Tool Name="VFFortranCompilerTool" SuppressStartupBanner="true" RuntimeLibrary="rtMultiThreadedDLL"/>
+				<Tool Name="VFLinkerTool" SuppressStartupBanner="true" SubSystem="subSystemWindows" LinkDLL="true"/>
+				<Tool Name="VFResourceCompilerTool"/>
+				<Tool Name="VFMidlTool" SuppressStartupBanner="true"/>
+				<Tool Name="VFCustomBuildTool"/>
+				<Tool Name="VFPreLinkEventTool"/>
+				<Tool Name="VFPreBuildEventTool"/>
+				<Tool Name="VFPostBuildEventTool"/>
+				<Tool Name="VFManifestTool" SuppressStartupBanner="true"/></Configuration>
+		<Configuration Name="Release|x64" ConfigurationType="typeDynamicLibrary">
+				<Tool Name="VFFortranCompilerTool" SuppressStartupBanner="true" MultiProcessorCompilation="true" RuntimeLibrary="rtMultiThreadedDLL"/>
+				<Tool Name="VFLinkerTool" SuppressStartupBanner="true" SubSystem="subSystemWindows" LinkDLL="true"/>
+				<Tool Name="VFResourceCompilerTool"/>
+				<Tool Name="VFMidlTool" SuppressStartupBanner="true" TargetEnvironment="midlTargetAMD64"/>
+				<Tool Name="VFCustomBuildTool"/>
+				<Tool Name="VFPreLinkEventTool"/>
+				<Tool Name="VFPreBuildEventTool"/>
+				<Tool Name="VFPostBuildEventTool"/>
+				<Tool Name="VFManifestTool" SuppressStartupBanner="true"/></Configuration></Configurations>
+	<Files>
+		<Filter Name="Header Files" Filter="fi;fd;h;inc"/>
+		<Filter Name="Resource Files" Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe"/>
+		<Filter Name="Source Files" Filter="f90;for;f;fpp;ftn;def;odl;idl">
+		<File RelativePath=".\src\seakeeping_collection.f90"/>
+		<File RelativePath=".\src\seakeeping_collection_queue.f90"/>
+		<File RelativePath=".\src\seakeeping_collection_queue_int.f90"/>
+		<File RelativePath=".\src\seakeeping_collection_queue_real.f90"/>
+		<File RelativePath=".\src\seakeeping_collection_stack.f90"/>
+		<File RelativePath=".\src\seakeeping_collection_stack_int.f90"/>
+		<File RelativePath=".\src\seakeeping_collection_stack_real.f90"/>
+		<File RelativePath=".\src\seakeeping_collection_vector.f90"/>
+		<File RelativePath=".\src\seakeeping_collection_vector_int.f90"/>
+		<File RelativePath=".\src\seakeeping_collection_vector_real.f90"/>
+		<File RelativePath=".\src\seakeeping_constants.f90"/>
+		<File RelativePath=".\src\seakeeping_geometry.f90"/>
+		<File RelativePath=".\src\seakeeping_kinds.F90">
+			<FileConfiguration Name="Release|x64">
+				<Tool Name="VFFortranCompilerTool" Preprocess="preprocessYes"/></FileConfiguration>
+			<FileConfiguration Name="Debug|x64">
+				<Tool Name="VFFortranCompilerTool" Preprocess="preprocessYes"/></FileConfiguration></File>
+		<File RelativePath=".\src\seakeeping_leapfrog.f90"/>
+		<File RelativePath=".\src\seakeeping_math.f90"/>
+		<File RelativePath=".\src\seakeeping_module.f90"/>
+		<File RelativePath=".\src\seakeeping_statics.f90"/>
+		<File RelativePath=".\src\seakeeping_tsa.f90"/>
+		<File RelativePath=".\src\seakeeping_wave.f90"/></Filter></Files>
+	<Globals/></VisualStudioProject>

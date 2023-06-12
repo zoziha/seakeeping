@@ -25,6 +25,9 @@
 seakeeping_dep = subproject('seakeeping').get_variable('seakeeping_dep')
 ```
 
+理论上，Meson 支持 Windows/macOS/Linux 下的 gfortran, macOS/Linux 下的 ifort。
+若需要支持 Windows 下的 ifort, 可搭配 VS2022 进行编译。
+
 ## 其他包
 
 这里列举其他适用于船舶耐波性问题的包：
