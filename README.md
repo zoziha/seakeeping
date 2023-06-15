@@ -1,8 +1,13 @@
+<div align='center'>
+
 # 船舶耐波性包
 
 ![seakeeping](https://img.shields.io/badge/Seakeeping-v2.5.20230611-blueviolet)
+![Language](https://img.shields.io/badge/-Fortran-734f96?logo=fortran&logoColor=white)
 [![license](https://img.shields.io/badge/License-BSD--3-brightgreen)](LICENSE)
-![Fortran](https://img.shields.io/badge/Fortran-^2008-purple)
+![Actions Status](https://github.com/zoziha/seakeeping/workflows/msys2-build/badge.svg)
+
+</div>
 
 基于编程经验，对特定领域编写更详实的表达型代码，有助于从底层提高代码的可读性、可维护性、可描述性。
 

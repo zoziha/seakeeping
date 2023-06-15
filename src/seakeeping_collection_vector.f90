@@ -15,7 +15,7 @@ module seakeeping_collection_vector
     !> Vector 泛型向量
     type vector
         private
-        integer, public :: len  !! 有效向量长度
+        integer, public :: len = 0  !! 有效向量长度
         type(node), allocatable :: items(:)  !! 泛型数组
     contains
         procedure :: init

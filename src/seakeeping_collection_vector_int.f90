@@ -10,7 +10,7 @@ module seakeeping_collection_vector_int
     !> Vector_int 整型向量
     type vector_int
         private
-        integer, public :: len  !! 有效向量长度
+        integer, public :: len = 0  !! 有效向量长度
         integer, allocatable :: items(:)  !! 整型数组
     contains
         procedure :: init

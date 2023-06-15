@@ -10,7 +10,7 @@ module seakeeping_collection_vector_real
     !> Vector_real 实数向量
     type vector_real
         private
-        integer, public :: len  !! 有效向量长度
+        integer, public :: len = 0  !! 有效向量长度
         real(rk), allocatable :: items(:)  !! 实数数组
     contains
         procedure :: init
