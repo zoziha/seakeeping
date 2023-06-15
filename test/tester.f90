@@ -5,6 +5,7 @@ program tester
     use testdrive, only: run_testsuite, new_testsuite, testsuite_type
     use test_seakeeping_leapfrog, only: collect_leapfrog
     use test_seakeeping_collection, only: collect_collection
+    use test_seakeeping_wave, only: collect_wave
     implicit none
 
     integer :: stat, is
@@ -15,6 +16,7 @@ program tester
 
     allocate (testsuites, source=[ &
               new_testsuite("leapfrog", collect_leapfrog), &
+              new_testsuite("wave", collect_wave), &
               new_testsuite("collection", collect_collection) &
               ])
 

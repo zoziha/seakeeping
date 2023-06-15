@@ -12,8 +12,9 @@ module seakeeping_wave
     use seakeeping_constants, only: g, Pi, pi2
     implicit none
 
-    public
-    private :: rk, g, Pi, pi2
+    private
+    public :: k01, k02, we, wlr, wf, wenergy, zeta, vdeep, &
+              ittc_tpwes_waveamplitude, ccwes_waveamplitude, ittc_spwes_waveamplitude
 
 contains
 
@@ -107,20 +108,54 @@ contains
 
     end function vdeep
 
-    !> ITTC 双参数波能谱模型计算频段有义波幅
-    pure subroutine ittc_waveamplitude(omega, domega, t1, hs, wave_amplitude)
+    !> 12th-ITTC (1969) 双参数波能谱模型计算频段有义波幅
+    !> ITTC two-parameter wave energy spectrum
+    pure subroutine ittc_tpwes_waveamplitude(omega, domega, t1, hs, wave_amplitude)
         real(kind=rk), intent(in) :: omega  !! 波浪角频率, rad/s
         real(kind=rk), intent(in) :: domega !! 频率间隔, rad/s
         real(kind=rk), intent(in) :: t1     !! 平均周期, s, T1 = 2*pi*m0/m1
         real(kind=rk), intent(in) :: hs     !! 有义波高, m
         real(kind=rk), intent(out) :: wave_amplitude !! 频段有义波幅, m
-        real(kind=rk) :: hsig
+        real(kind=rk) :: s
 
         associate (a => 173*hs**2/t1**4, b => 691/t1**4)
-            hsig = a*exp(-b/omega**4)/omega**5
-            wave_amplitude = sqrt(2*hsig*domega)  ! A = sqrt(2*S_\omega*d\omega)
+            s = a*exp(-b/omega**4)/omega**5
+            wave_amplitude = sqrt(2*s*domega)  ! A = sqrt(2*S_\omega*d\omega)
         end associate
 
-    end subroutine ittc_waveamplitude
+    end subroutine ittc_tpwes_waveamplitude
+
+    !> 11th-ITTC (1966) 单参数波能谱模型计算频段有义波幅
+    !> ITTC single-parameter wave energy spectrum
+    pure subroutine ittc_spwes_waveamplitude(omega, domega, hs, wave_amplitude)
+        real(kind=rk), intent(in) :: omega  !! 波浪角频率, rad/s
+        real(kind=rk), intent(in) :: domega !! 频率间隔, rad/s
+        real(kind=rk), intent(in) :: hs     !! 有义波高, m
+        real(kind=rk), intent(out) :: wave_amplitude !! 频段有义波幅, m
+        real(kind=rk) :: s
+        real(kind=rk), parameter :: a = 8.1e-3_rk*g**2
+
+        associate (b => 3.11_rk/hs**2)
+            s = a*exp(-b/omega**4)/omega**5
+            wave_amplitude = sqrt(2*s*domega)  ! A = sqrt(2*S_\omega*d\omega)
+        end associate
+
+    end subroutine ittc_spwes_waveamplitude
+
+    !> 中国沿海波能谱模型计算频段有义波幅
+    !> China Coastal Wave Energy Spectrum
+    pure subroutine ccwes_waveamplitude(omega, domega, hs, wave_amplitude)
+        real(kind=rk), intent(in) :: omega  !! 波浪角频率, rad/s
+        real(kind=rk), intent(in) :: domega !! 频率间隔, rad/s
+        real(kind=rk), intent(in) :: hs     !! 有义波高, m
+        real(kind=rk), intent(out) :: wave_amplitude !! 频段有义波幅, m
+        real(kind=rk) :: s
+
+        associate (u => 6.28_rk*sqrt(hs))
+            s = 0.74_rk*exp(-(g/(u*omega))**2)/omega**5
+            wave_amplitude = sqrt(2*s*domega)  ! A = sqrt(2*S_\omega*d\omega)
+        end associate
+
+    end subroutine ccwes_waveamplitude
 
 end module seakeeping_wave
