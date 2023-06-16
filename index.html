@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="description" content="🌏船舶耐波性例程">
+    <meta name="author" content="左志华" >
+    <link rel="icon" href="./favicon.png">
+
+    <title> Seakeeping </title>
+
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+    <link href="./css/pygments.css" rel="stylesheet">
+    <link href="./css/font-awesome.min.css" rel="stylesheet">
+    <link href="./css/local.css" rel="stylesheet">
+      <link  href="./tipuesearch/tipuesearch.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+         <script src="./js/jquery-2.1.3.min.js"></script>
+         <script src="./js/svg-pan-zoom.min.js"></script>
+
+  </head>
+
+  <body>
+
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="./index.html">Seakeeping </a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+              <li><a href='./page/index.html'>User Guide</a></li>
+            <li class="dropdown hidden-xs visible-sm visible-md hidden-lg">
+              <a href="#" class="dropdown-toggle"
+                 data-toggle="dropdown" role="button"
+                 aria-haspopup="true"
+                 aria-expanded="false">
+                 Contents <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+                    <li><a href="./lists/files.html">Source Files</a></li>
+                  <li><a href="./lists/modules.html">Modules</a></li>
+                  <li><a href="./lists/procedures.html">Procedures</a></li>
+                  <li><a href="./lists/types.html">Derived Types</a></li>
+              </ul>
+            </li>
+                <li class="visible-xs hidden-sm visible-lg">
+                  <a href="./lists/files.html">Source Files</a>
+                </li>
+              <li class="visible-xs hidden-sm visible-lg">
+                <a href="./lists/modules.html">Modules</a>
+              </li>
+              <li class="visible-xs hidden-sm visible-lg">
+                <a href="./lists/procedures.html">Procedures</a>
+              </li>
+              <li class="visible-xs hidden-sm visible-lg">
+                <a href="./lists/types.html">Derived Types</a>
+              </li>
+          </ul>
+            <form action="./search.html" class="navbar-form navbar-right" role="search">
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="Search" name="q" id="tipue_search_input" autocomplete="off" required>
+              </div>
+              <!--
+                  <button type="submit" class="btn btn-default">Submit</button>
+                  -->
+            </form>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <div class="container">
+      <!-- Main component for a primary marketing message or call to action -->
+      <div class="jumbotron">
+        <p>🌏船舶耐波性例程</p>
+	<p> Find us on&hellip;</p>
+        <p>
+          <a class="btn btn-lg btn-primary" href="https://gitee.com/ship-motions/seakeeping" role="button">The Web</a>
+          <a class="btn btn-lg btn-danger" style="float:right" href="https://gitee.com/ship-motions/seakeeping/releases" role="button">Download the Source</a>
+        </p>
+      </div>
+
+      <div class="row" id='text'>
+        <div class="col-md-8">
+          <h1>Seakeeping</h1>
+          <p><img alt="Language" src="https://img.shields.io/badge/-Fortran-734f96?logo=fortran&amp;logoColor=white">
+<a href="LICENSE"><img alt="license" src="https://img.shields.io/badge/License-BSD--3-brightgreen"></a>
+<img alt="Actions Status" src="https://github.com/zoziha/seakeeping/workflows/msys2-build/badge.svg"></p>
+<p><code>seakeeping</code> 是一个适用于船舶耐波性相关计算的函数包。</p>
+<p>基于编程经验，对特定领域编写更详实的表达型代码，有助于从底层提高代码的可读性、可维护性、可描述性。</p>
+<p>于是，形成了这个包，用于表达、计算船舶耐波性问题。事实证明，本包的确提高了我的编码效率与代码复用。</p>
+<p>除此之外，还有 fffc 通用函数库，kissfft-f 快速傅里叶变换库，以及其他一些包，可以用于船舶耐波性问题的求解。</p>
+<h2 id="meson">使用 Meson 编译</h2>
+<p>本包也支持使用 <code>meson</code> 构建，可以使用 <code>meson</code> 的 <code>subproject</code> 功能，将 <code>seakeeping</code> 作为子项目引入。</p>
+<div class="codehilite"><pre><span></span><code>&gt; meson setup _build  <span class="c1"># 配置 meson 构建目录</span>
+&gt; meson compile -C _build  <span class="c1"># 编译</span>
+</code></pre></div>
+
+<p>在 <code>meson.build</code> 中，可以使用 <code>subproject</code> 函数引入 <code>seakeeping</code>：</p>
+<div class="codehilite"><pre><span></span><code><span class="n">seakeeping_dep</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">subproject</span><span class="p">(</span><span class="s">&#39;seakeeping&#39;</span><span class="p">).</span><span class="n">get_variable</span><span class="p">(</span><span class="s">&#39;seakeeping_dep&#39;</span><span class="p">)</span><span class="w"></span>
+</code></pre></div>
+
+<p>理论上，Meson 支持 Windows/macOS/Linux 下的 gfortran, macOS/Linux 下的 ifort。
+若需要支持 Windows 下的 ifort, 可搭配 VS2022 进行编译。</p>
+<h2 id="_1">其他包</h2>
+<p>这里列举其他适用于船舶耐波性问题的包：</p>
+<ul>
+<li>minpack/nlopt-f：非线性方程组求解；</li>
+<li>fftw/fftpack：快速傅里叶变换；</li>
+<li>fgsl/gsl：通用数学函数；</li>
+<li>toml-f：配置文件，终端；</li>
+<li>M_CLI2：命令行；</li>
+<li>test-drive：单元测试；</li>
+<li>root-fortran：根查找；</li>
+<li>polyroot-fortran：多项式根查找；</li>
+<li>quadrature-fortran：多维高斯-勒让德积分；</li>
+<li>VTKFortran/H5part：存储与可视化；</li>
+<li>Source Codes in Fortran90: Fortran 90 代码。</li>
+</ul>
+<p>此外，还有 CAE 模型的解析和数值模型可视化，技术细节层面如函数积分、统计、排序、特殊函数等内容。</p>
+        </div>
+        <div class="col-md-4">
+	  <div class="well">
+          <h2>Developer Info</h2>
+          <h4>左志华</h4>
+          <p>哈尔滨工程大学-船舶与海洋结构物设计制造，在读学生</p>
+            <div class="text-center"><div class="btn-group" role="group">
+              <a class="btn btn-lg btn-primary" href="mailto:zuo.zhihua@qq.com"><i class="fa fa-envelope fa-lg"></i></a>
+             <a class="btn btn-lg btn-primary" href="https://gitee.com/zoziha"><i class="fa fa-globe fa-lg"></i></a>
+            </div></div>
+       </div>
+       </div>
+      </div>
+        <div class="row">
+          <hr>
+          <div class="col-xs-6 col-sm-3">
+            <div>
+              <h3>Source Files</h3>
+              <ul><li><a href='./sourcefile/seakeeping_collection.f90.html'>seakeeping_collection.f90</a></li><li><a href='./sourcefile/seakeeping_collection_queue.f90.html'>seakeeping_collection_queue.f90</a></li><li><a href='./sourcefile/seakeeping_collection_queue_int.f90.html'>seakeeping_collection_queue_int.f90</a></li><li><a href='./sourcefile/seakeeping_collection_queue_real.f90.html'>seakeeping_collection_queue_real.f90</a></li><li><a href='./sourcefile/seakeeping_collection_stack.f90.html'>seakeeping_collection_stack.f90</a></li><li><a href='./sourcefile/seakeeping_collection_stack_int.f90.html'>seakeeping_collection_stack_int.f90</a></li><li><a href='./sourcefile/seakeeping_collection_stack_real.f90.html'>seakeeping_collection_stack_real.f90</a></li><li><a href='./sourcefile/seakeeping_collection_vector.f90.html'>seakeeping_collection_vector.f90</a></li><li><a href='./sourcefile/seakeeping_collection_vector_int.f90.html'>seakeeping_collection_vector_int.f90</a></li><li><a href='./sourcefile/seakeeping_collection_vector_real.f90.html'>seakeeping_collection_vector_real.f90</a></li></ul>
+            </div>
+            <div>
+              <ul>
+                <li><a href="./lists/files.html"><em>All source files&hellip;</em></a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-xs-6 col-sm-3">
+            <div>
+              <h3>Modules</h3>
+              <ul><li><a href='./module/seakeeping_collection.html'>seakeeping_collection</a></li><li><a href='./module/seakeeping_collection_queue.html'>seakeeping_collection_queue</a></li><li><a href='./module/seakeeping_collection_queue_int.html'>seakeeping_collection_queue_int</a></li><li><a href='./module/seakeeping_collection_queue_real.html'>seakeeping_collection_queue_real</a></li><li><a href='./module/seakeeping_collection_stack.html'>seakeeping_collection_stack</a></li><li><a href='./module/seakeeping_collection_stack_int.html'>seakeeping_collection_stack_int</a></li><li><a href='./module/seakeeping_collection_stack_real.html'>seakeeping_collection_stack_real</a></li><li><a href='./module/seakeeping_collection_vector.html'>seakeeping_collection_vector</a></li><li><a href='./module/seakeeping_collection_vector_int.html'>seakeeping_collection_vector_int</a></li><li><a href='./module/seakeeping_collection_vector_real.html'>seakeeping_collection_vector_real</a></li></ul>
+            </div>
+            <div>
+              <ul>
+                <li><a href="./lists/modules.html"><em>All modules&hellip;</em></a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-xs-6 col-sm-3">
+            <div>
+              <h3>Procedures</h3>
+              <ul><li><a href='./proc/ampd.html'>AMPD</a></li><li><a href='./proc/angle.html'>angle</a></li><li><a href='./interface/area.html'>area</a></li><li><a href='./proc/ccwes_waveamplitude.html'>ccwes_waveamplitude</a></li><li><a href='./interface/centroid.html'>centroid</a></li><li><a href='./proc/distance.html'>distance</a></li><li><a href='./proc/euler_formula.html'>euler_formula</a></li><li><a href='./proc/heron_formula.html'>heron_formula</a></li><li><a href='./proc/hsp.html'>hsp</a></li><li><a href='./proc/ittc_spwes_waveamplitude.html'>ittc_spwes_waveamplitude</a></li></ul>
+            </div>
+            <div>
+              <ul>
+                <li><a href="./lists/procedures.html"><em>All procedures&hellip;</em></a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-xs-6 col-sm-3">
+            <div>
+              <h3>Derived Types</h3>
+              <ul><li><a href='./type/queue.html'>queue</a></li><li><a href='./type/queue_int.html'>queue_int</a></li><li><a href='./type/queue_int_iterator.html'>queue_int_iterator</a></li><li><a href='./type/queue_iterator.html'>queue_iterator</a></li><li><a href='./type/queue_real.html'>queue_real</a></li><li><a href='./type/queue_real_iterator.html'>queue_real_iterator</a></li><li><a href='./type/stack.html'>stack</a></li><li><a href='./type/stack_int.html'>stack_int</a></li><li><a href='./type/stack_int_iterator.html'>stack_int_iterator</a></li><li><a href='./type/stack_iterator.html'>stack_iterator</a></li></ul>
+            </div>
+            <div>
+              <ul>
+                <li><a href="./lists/types.html"><em>All derived types&hellip;</em></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      <hr>
+    </div> <!-- /container -->
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-6 col-md-6"><p>Seakeeping was developed by 左志华<br>&copy; 2023 <a rel="license" href="http://www.freebsd.org/copyright/freebsd-doc-license.html">FreeBSD Documentation License</a>
+</p>
+          </div>
+          <div class="col-xs-6 col-md-6">
+            <p class="text-right">
+              Documentation generated by
+              <a href="https://github.com/Fortran-FOSS-Programmers/ford">FORD</a>
+ on 2023-06-16 11:00              </p>
+          </div>
+        </div>
+        <br>
+      </div> <!-- /container -->
+    </footer>
+
+    <!-- Bootstrap core JavaScript
+         ================================================== -->
+         <!-- Placed at the end of the document so the pages load faster -->
+    <!--
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        -->
+        <script src="./js/bootstrap.min.js"></script>
+        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+        <script src="./js/ie10-viewport-bug-workaround.js"></script>
+
+        <!-- MathJax JavaScript
+             ================================================== -->
+             <!-- Placed at the end of the document so the pages load faster -->
+        <script type="text/x-mathjax-config">
+          MathJax.Hub.Config({
+          TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } },
+          jax: ['input/TeX','input/MathML','output/HTML-CSS'],
+          extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']
+          });
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+          <script src="./tipuesearch/tipuesearch_content.js"></script>
+          <script src="./tipuesearch/tipuesearch_set.js"></script>
+          <script src="./tipuesearch/tipuesearch.js"></script>
+
+  </body>
+</html>
